@@ -1,0 +1,19 @@
+Package: SDRcausal
+Version: 0.3.0
+Date: 2020-06-11
+Title: SDRcausal
+Authors@R: c(
+	person("Filip", "Edstrom", role = c("aut", "cre"), email = "filip.edstrom@umu.se"),
+	person("Xavier", "de Luna", role = "aut", email = "xavier.de.luna@umu.se"),
+	person("Mohammad", "Ghasempour", role = "aut", email = "mohammad.ghasempour@umu.se"))
+Author: Filip Edstrom [aut, cre]
+Maintainer: Mohammad Ghasempour <mohammad.ghasempour@umu.se>
+Description: Provides two semiparametric estimators, semipar_imputation and semipar_ipw.
+Encoding: UTF-8
+Imports: stats
+Suggests: nloptr, ggplot2
+LazyData: true
+License: GPL (>= 2)
+RoxygenNote: 7.0.2
+NeedsCompilation: yes
+Packaged: 2020-03-02 14:42:34 UTC; fileds
