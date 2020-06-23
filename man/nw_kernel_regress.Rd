@@ -45,7 +45,7 @@ x <- SDRcausal::covariates
 y <- SDRcausal::outcomes
 
 # Extimating y given x, E(y | x)
-k <- nw_kernel_regress(x, y, bandwidth = 1)
+k <- nw_kernel_regress(y, x, bandwidth = 1)
 
 }
 \references{

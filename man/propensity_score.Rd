@@ -52,7 +52,7 @@ trt <- SDRcausal::treated
 alp <- SDRcausal::alpha_guess
 
 # Perform semiparametric dimension reduction
-cms <- SDRcausal::ipw_dim_red(x, trt1, alp,
+cms <- SDRcausal::ipw_dim_red(x, trt, alp,
            explicit_bandwidth = TRUE, bandwidth_scale = 8)
 
 # Estimate propensity score
