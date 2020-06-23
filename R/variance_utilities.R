@@ -2,7 +2,7 @@
 #'
 #' @description Calculates Eq 2.8 or 2.10 in Ghosh, Ma, & De Luna (2020).
 #'
-#' @param x_lower      Projection of covariate matrix on CMS
+#' @param x      Projection of covariate matrix on CMS
 #' @param treated      Binary vector indicating treatment.
 #' @param dm           Derivative of imputed values
 #' @param beta         CMS
@@ -62,6 +62,7 @@ b10_fun <- function(x,
 #' @param h         CMS
 #' @param kernel    Specifies which kernel function to be used
 #' @param bandwidth Kernel bandwidth
+#' @param bandwidth_pr  Kernel bandwidth for probability
 #' @param verbose   Specifies if the program should print output while running.
 #'
 #' @return B1/0 matrix
