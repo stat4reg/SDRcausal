@@ -13,7 +13,7 @@ semipar_ipw(
   explicit_bandwidth = FALSE,
   recalc_bandwidth = TRUE,
   bwc_dim_red = 1,
-  bwc_prop_score = 1,
+  bwc_prop_score = 10,
   gauss_cutoff = 0.001,
   penalty = 10,
   n_before_pen = 1,

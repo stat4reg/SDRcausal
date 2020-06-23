@@ -16,7 +16,7 @@ aipw_variance(
   kernel = "EPAN",
   explicit_bandwidth = TRUE,
   gauss_cutoff = 0.001,
-  num_deriv_h = 0.001,
+  num_deriv_h = 1e-08,
   verbose = FALSE
 )
 }
@@ -41,7 +41,7 @@ aipw_variance(
 
 \item{explicit_bandwidth}{Specifies if bandwidth_scale will be used as the
 bandwidth or if it will be calculated as bw =
-bandwidth_scale * sd(x * beta) * n^(1/3).}
+bandwidth_scale * sd(x * beta) * n^(1/5).}
 
 \item{gauss_cutoff}{Cutoff value for Gaussian kernel}
 
