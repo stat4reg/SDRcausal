@@ -11,7 +11,7 @@
 #' @return A list of ggplot plots of observed and imputed values (pl_imp),
 #'         imputed treated values vs CMS (pl_m1), and imputed untreated values
 #'         vs CMS (pl_m0).
-#'
+#' @import ggplot2
 #' @export
 #'
 #' @examples
@@ -39,7 +39,7 @@ plot_imp <- function(x,
                      treated,
                      imp)
 {
-  stopifnot("ggplot2" %in% (.packages()))
+  #stopifnot("ggplot2" %in% (.packages()))
 
   # Number of observations
   n <- length(y)
