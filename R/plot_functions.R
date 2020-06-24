@@ -90,7 +90,7 @@ plot_imp <- function(x,
     guides(shape = guide_legend(title = "Obs/Imp"),
            color = guide_legend(title = "Treatment"),
            linetype = guide_legend(title = " ")) +
-    ggtitle(expression(paste("Imputated and observed outcomes VS subspace", ~beta[t]^T ,x)) ) +
+    ggtitle(expression(paste("Imputated and observed outcomes VS subspace", ~beta[1]^T ,x)) ) +
     xlab("CMS") +
     ylab("Outcome")
 
@@ -103,7 +103,7 @@ plot_imp <- function(x,
     guides(shape = guide_legend(title = "Obs/Imp"),
            color = guide_legend(title = "Treatment"),
            linetype = guide_legend(title = " ")) +
-    ggtitle("Imputation of treated outcomes") +
+    ggtitle(expression(paste("Imputated and observed outcomes VS subspace", ~beta[0]^T ,x))) +
     xlab("CMS") +
     ylab("Outcome")
 
