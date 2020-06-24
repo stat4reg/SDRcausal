@@ -120,7 +120,8 @@ plot_imp <- function(x,
 #' @param ipw                 ipw_output object from semipar_ipw()
 #'
 #' @return ggplot plot of the propensity score vs CMS.
-#'
+#' 
+#' @import ggplot2
 #' @export
 #'
 #' @examples
@@ -146,7 +147,7 @@ plot_imp <- function(x,
 plot_ipw <- function(treated,
                      ipw)
 {
-  stopifnot("ggplot2" %in% (.packages()))
+  #stopifnot("ggplot2" %in% (.packages()))
 
   # CMS projections of covariate matrix
   xa <- x %*% ipw$alpha_hat
