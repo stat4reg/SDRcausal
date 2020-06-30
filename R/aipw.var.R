@@ -6,8 +6,8 @@
 #' @param x                   Covariate matrix
 #' @param y                   Response vector
 #' @param treated             Binary vetor indicating treatment
-#' @param imp                 imp_output object from semipar_imputation()
-#' @param ipw                 ipw_output object from semipar_ipw()
+#' @param imp                 imp_output object from imp.ate()
+#' @param ipw                 ipw_output object from ipw.ate()
 #' @param treated             Binary vetor indicating treatment
 #' @param bandwidth_scale1    Scaling of the calculated bandwidth, m1
 #' @param bandwidth_scale0    Scaling of the calculated bandwidth, m0
@@ -44,20 +44,20 @@
 #' alp <- SDRcausal::alpha_guess
 #'
 #' # Perform semiparametric imputation
-#' imp <- SDRcausal::semipar_imputation(x, y, trt, b1, b0,
+#' imp <- SDRcausal::imp.ate(x, y, trt, b1, b0,
 #'            explicit_bandwidth = TRUE, bwc_dim_red1 = 1, bwc_impute1 = 1,
 #'            bwc_dim_red0 = 1, bwc_impute0 = 1)
 #'
 #' # Perform semiparametric inverse probability weighting
-#' ipw <- SDRcausal::semipar_ipw(x, y, trt, alp, bwc_dim_red = 10,
+#' ipw <- SDRcausal::ipw.ate(x, y, trt, alp, bwc_dim_red = 10,
 #'            bwc_prop_score = 18)
 #'
 #' # Calculate the variance of the Augmented IPW (AIPW)
-#' var <- SDRcausal::aipw_variance(x, y, trt, imp, ipw,
+#' var <- SDRcausal::aipw_var(x, y, trt, imp, ipw,
 #'            bandwidth_scale1 = imp$bw1, bandwidth_scale0 = imp$bw0,
 #'            bandwidth_scale_pr = ipw$bw_pr)
 #'
-aipw_variance <- function(x,
+aipw_var <- function(x,
                           y,
                           treated,
                           imp,

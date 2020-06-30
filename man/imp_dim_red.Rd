@@ -15,7 +15,7 @@ imp_dim_red(
   bandwidth_scale = 1,
   gauss_cutoff = 0.001,
   penalty = 10,
-  n_before_pen = 5,
+  n_before_pen = 1,
   root_tol = 0.001,
   n_threads = 1,
   verbose = FALSE,
@@ -40,7 +40,7 @@ current options are: "EPAN", "QUARTIC", and
 
 \item{explicit_bandwidth}{Specifies if bandwidth_scale will be used as the
 bandwidth or if it will be calculated as
-bw = bandwidth_scale * sd(x * beta) * n^(1/3)}
+bw = bandwidth_scale * sd(x * beta) * n^(1/5)}
 
 \item{bandwidth_scale}{Scaling of the bandwidth or the actual bandwidth
 if explicit bandwidth.}

@@ -15,10 +15,10 @@
 #'                           bandwidth_scale * sd(x * beta) * n^(1/3).
 #' @param recalc_bandwidth   Specifies wheter the bandwidth should be
 #'                           recalculated after the estimation of alpha
-#'                           (ipw_dim_red)
+#'                           (cms.ps.semi)
 #' @param bwc_dim_red        Scaling of calculated bandwidth, or if
 #'                           explicit_bandwidth = TRUE used as the banddwidth.
-#'                           For dimension reduction (ipw_dim_red).
+#'                           For dimension reduction (cms.ps.semi).
 #' @param bwc_prop_score     Scaling of calculated bandwidth, or if
 #'                           explicit_bandwidth = TRUE used as the banddwidth.
 #'                           Recalculated if explicit_bandwidth = FALSE and
@@ -62,10 +62,10 @@
 #' alp <- SDRcausal::alpha_guess
 #'
 #' # Perform semiparametric inverse probability weighting
-#' ipw <- SDRcausal::semipar_ipw(x, y, trt, alp, bwc_dim_red = 8,
+#' ipw <- SDRcausal::ipw.ate(x, y, trt, alp, bwc_dim_red = 8,
 #'            bwc_prop_score = 8)
 #'
-semipar_ipw <- function(x,
+ipw.ate <- function(x,
                         y,
                         treated,
                         alpha_initial,
@@ -137,7 +137,7 @@ semipar_ipw <- function(x,
   if (verbose) {
     cat("\nReducing dimension (alpha)\n")
   }
-  cms <- ipw_dim_red(x,
+  cms <- cms.ps.semi(x,
                      treated,
                      alpha_initial = alpha_initial,
                      kernel = "EPAN",
@@ -159,7 +159,7 @@ semipar_ipw <- function(x,
     bwc_prop_score = cms$bw
   }
 
-  prop_score <- propensity_score(x,
+  prop_score <- ps.semi(x,
                                  treated,
                                  cms$fa,
                                  kernel = "EPAN",
@@ -175,7 +175,7 @@ semipar_ipw <- function(x,
   tau_est[tbl] <- y[tbl] / pr[tbl]
   tau_est[!tbl] <- -1 * y[!tbl] / (1 - pr[!tbl])
 
-  ate <- mean(tau_est[!is.infinite(tau_est)]) 
+  ate <- mean(tau_est[!is.infinite(tau_est)])
 
   output <- list(ate = ate,
                  pr = pr,

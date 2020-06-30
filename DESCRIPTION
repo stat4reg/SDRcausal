@@ -8,12 +8,12 @@ Authors@R: c(
 	person("Mohammad", "Ghasempour", role = "aut", email = "mohammad.ghasempour@umu.se"))
 Author: Filip Edstrom [aut, cre]
 Maintainer: Mohammad Ghasempour <mohammad.ghasempour@umu.se>
-Description: Provides two semiparametric estimators, semipar_imputation and semipar_ipw.
+Description: Provides two semiparametric estimators, imp.ate and ipw.ate.
 Encoding: UTF-8
-Imports: stats
-Suggests: nloptr, ggplot2
+Imports: stats, ggplot2
+Suggests: nloptr
 LazyData: true
 License: GPL (>= 2)
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.0
 NeedsCompilation: yes
 Packaged: 2020-03-02 14:42:34 UTC; fileds

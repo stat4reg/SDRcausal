@@ -1,17 +1,17 @@
 #' @title Plots imputation output
 #'
 #' @description Plot function for visualisation of imputation output from
-#'              semipar_imputation. Note: The function requires ggplot2.
+#'              imp.ate. Note: The function requires ggplot2.
 #'
 #' @param x                   Covariate matrix
 #' @param y                   Response vector
 #' @param treated             Binary vetor indicating treatment
-#' @param imp                 imp_output object from semipar_imputation()
+#' @param imp                 imp_output object from imp.ate()
 #'
 #' @return A list of ggplot plots of observed and imputed values (pl_imp),
 #'         imputed treated values vs CMS (pl_m1), and imputed untreated values
 #'         vs CMS (pl_m0).
-#'
+#' @import ggplot2
 #' @export
 #'
 #' @examples
@@ -27,19 +27,19 @@
 #' alp <- SDRcausal::alpha_guess
 #'
 #' # Perform semiparametric imputation
-#' imp <- SDRcausal::semipar_imputation(x, y, trt, b1, b0,
+#' imp <- SDRcausal::imp.ate(x, y, trt, b1, b0,
 #'            explicit_bandwidth = TRUE, bwc_dim_red1 = 1, bwc_impute1 = 1,
 #'            bwc_dim_red0 = 1, bwc_impute0 = 1)
 #'
 #' # Plotting
-#' plots <- plot_imp(x, y, trt, imp)
+#' plots <- plot.imp(x, y, trt, imp)
 #'
-plot_imp <- function(x,
+plot.imp <- function(x,
                      y,
                      treated,
                      imp)
 {
-  stopifnot("ggplot2" %in% (.packages()))
+  #stopifnot("ggplot2" %in% (.packages()))
 
   # Number of observations
   n <- length(y)
@@ -90,7 +90,7 @@ plot_imp <- function(x,
     guides(shape = guide_legend(title = "Obs/Imp"),
            color = guide_legend(title = "Treatment"),
            linetype = guide_legend(title = " ")) +
-    ggtitle("Imputated and observed outcomes VS subspace beta[t]^T x", ) +
+    ggtitle(expression(paste("Imputated and observed outcomes VS subspace", ~beta[1]^T ,x)) ) +
     xlab("CMS") +
     ylab("Outcome")
 
@@ -103,7 +103,7 @@ plot_imp <- function(x,
     guides(shape = guide_legend(title = "Obs/Imp"),
            color = guide_legend(title = "Treatment"),
            linetype = guide_legend(title = " ")) +
-    ggtitle("Imputation of treated outcomes") +
+    ggtitle(expression(paste("Imputated and observed outcomes VS subspace", ~beta[0]^T ,x))) +
     xlab("CMS") +
     ylab("Outcome")
 
@@ -113,14 +113,15 @@ plot_imp <- function(x,
 
 #' @title Plots IPW output
 #'
-#' @description Plot function for visualisation of IPW output from semipar_ipw.
+#' @description Plot function for visualisation of IPW output from ipw.ate.
 #'              Note: The function requires ggplot2.
 #'
 #' @param treated             Binary vetor indicating treatment
-#' @param ipw                 ipw_output object from semipar_ipw()
+#' @param ipw                 ipw_output object from ipw.ate()
 #'
 #' @return ggplot plot of the propensity score vs CMS.
 #'
+#' @import ggplot2
 #' @export
 #'
 #' @examples
@@ -136,17 +137,17 @@ plot_imp <- function(x,
 #' alp <- SDRcausal::alpha_guess
 #'
 #' # Perform semiparametric imputation
-#' imp <- SDRcausal::semipar_imputation(x, y, trt, b1, b0,
+#' ipw <- SDRcausal::ipw.ate(x, y, trt, b1, b0,
 #'            explicit_bandwidth = TRUE, bwc_dim_red1 = 1, bwc_impute1 = 1,
 #'            bwc_dim_red0 = 1, bwc_impute0 = 1)
 #'
 #' # Plotting
-#' plots <- plot_imp(x, y, trt, imp)
+#' plots <- plot.ipw(x, y, trt, ipw)
 #'
-plot_ipw <- function(treated,
+plot.ipw <- function(treated,
                      ipw)
 {
-  stopifnot("ggplot2" %in% (.packages()))
+  #stopifnot("ggplot2" %in% (.packages()))
 
   # CMS projections of covariate matrix
   xa <- x %*% ipw$alpha_hat

@@ -4,10 +4,10 @@
 \alias{b10_fun}
 \title{Calculates B1/0}
 \usage{
-b10_fun(x_lower, treated, dm, beta, kernel, bandwidth, gauss_cutoff)
+b10_fun(x, treated, dm, beta, kernel, bandwidth, gauss_cutoff)
 }
 \arguments{
-\item{x_lower}{Projection of covariate matrix on CMS}
+\item{x}{Projection of covariate matrix on CMS}
 
 \item{treated}{Binary vector indicating treatment.}
 

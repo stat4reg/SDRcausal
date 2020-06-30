@@ -4,7 +4,8 @@
 \name{example_data}
 \alias{example_data}
 \title{Example data}
-\format{Data used in examples of the SDRcausal package
+\format{
+Data used in examples of the SDRcausal package
 \describe{
   \item{covariates}{covariate matrix}
   \item{outcomes}{observed outcome vector}
@@ -12,7 +13,8 @@
   \item{beta1_guess}{Starting guess for CMS for treated}
   \item{beta0_guess}{Starting guess for CMS for untreated}
   \item{alpha_guess}{Starting guess for CMS for propensity score}
-}}
+}
+}
 \description{
 Data generated as in paper, study 1. Using the betas in betas
              data. Use beta1/0 for imputation as the initial guess of the

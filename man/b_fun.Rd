@@ -4,12 +4,12 @@
 \alias{b_fun}
 \title{Calculates B1/0}
 \usage{
-b_fun(x, d_eta, alpha_hat, h, kernel, bandwidth, verbose)
+b_fun(x, treated, alpha_hat, h, kernel, bandwidth, bandwidth_pr, verbose)
 }
 \arguments{
 \item{x}{Projection of covariate matrix on CMS}
 
-\item{d_eta}{Derivative of propensity score}
+\item{treated}{Treated}
 
 \item{alpha_hat}{Derivative of imputed values}
 
@@ -18,6 +18,8 @@ b_fun(x, d_eta, alpha_hat, h, kernel, bandwidth, verbose)
 \item{kernel}{Specifies which kernel function to be used}
 
 \item{bandwidth}{Kernel bandwidth}
+
+\item{bandwidth_pr}{Kernel bandwidth for probability}
 
 \item{verbose}{Specifies if the program should print output while running.}
 }

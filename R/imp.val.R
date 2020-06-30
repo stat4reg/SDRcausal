@@ -1,7 +1,7 @@
 #' @title Estimates imputed values based on CMS
 #'
 #' @description Performs semiparametric imputation based on the CMS calculated
-#'              by imp_dim_red, as in Ghosh, Ma, & De Luna (2020).
+#'              by cms.semi, as in Ghosh, Ma, & De Luna (2020).
 #'
 #' @param x                   Covariate matrix
 #' @param y                   Response vector
@@ -54,22 +54,22 @@
 #' b0 <- SDRcausal::beta0_guess
 #'
 #' # Perform semiparametric dimension reduction for treated
-#' cms1 <- SDRcausal::imp_dim_red(x, y, trt1, b1,
+#' cms1 <- SDRcausal::cms.semi(x, y, trt1, b1,
 #'            explicit_bandwidth = 1, bandwidth_scale = 1)
 #'
 #' # Perform semiparametric dimension reduction for untreated
-#' cms0 <- SDRcausal::imp_dim_red(x, y, trt0, b0,
+#' cms0 <- SDRcausal::cms.semi(x, y, trt0, b0,
 #'            explicit_bandwidth = 1, bandwidth_scale = 1)
 #'
 #' # Perform semiparametric imputation for treated
-#' m1 <- SDRcausal::impute(x, y, trt1, cms1$fb,
+#' m1 <- SDRcausal::imp.val(x, y, trt1, cms1$fb,
 #'          explicit_bandwidth = 1, bandwidth_scale = cms1$bw)
 #'
 #' # Perform semiparametric imputation for untreated
-#' m0 <- SDRcausal::impute(x, y, trt0, cms0$fb,
+#' m0 <- SDRcausal::imp.val(x, y, trt0, cms0$fb,
 #'          explicit_bandwidth = 1, bandwidth_scale = cms0$bw)
 #'
-impute <- function(x,
+imp.val <- function(x,
                    y,
                    treated,
                    beta_hat,

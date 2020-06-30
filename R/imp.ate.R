@@ -19,10 +19,10 @@
 #'                            bandwidth_scale * sd(x * beta) * n^(1/3).
 #' @param recalc_bandwidth    Specifies wheter the bandwidth should be
 #'                            recalculated after the estimation of alpha
-#'                            (ipw_dim_red).
+#'                            (cms.ps.semi).
 #' @param bwc_dim_red1        Scaling of calculated bandwidth, or if
 #'                            explicit_bandwidth = TRUE used as the banddwidth.
-#'                            For dimension reduction (imp_dim_red).
+#'                            For dimension reduction (cms.semi).
 #' @param bwc_dim_red0        See bwc_dim_red1
 #' @param bwc_impute1         Scaling of calculated bandwidth, or if
 #'                            explicit_bandwidth = TRUE used as the banddwidth.
@@ -74,11 +74,11 @@
 #' b0 <- SDRcausal::beta0_guess
 #'
 #' # Perform semiparametric imputation
-#' imp <- SDRcausal::semipar_imputation(x, y, trt, b1, b0,
+#' imp <- SDRcausal::imp.ate(x, y, trt, b1, b0,
 #'            explicit_bandwidth = TRUE, bwc_dim_red1 = 1, bwc_impute1 = 1,
 #'            bwc_dim_red0 = 1, bwc_impute0 = 1)
 #'
-semipar_imputation <- function(x,
+imp.ate <- function(x,
                                y,
                                treated1,
                                beta_guess1,
@@ -174,7 +174,7 @@ semipar_imputation <- function(x,
   if (verbose) {
     cat("\nReducing dimension for treated (beta 1)\n")
   }
-  cms1 <- imp_dim_red(x = x,
+  cms1 <- cms.semi(x = x,
                       y = y,
                       treated = treated1,
                       beta_initial = beta_guess1,
@@ -192,7 +192,7 @@ semipar_imputation <- function(x,
   if (verbose) {
     cat("\nReducing dimension for untreated (beta 0)\n")
   }
-  cms0 <- imp_dim_red(x = x,
+  cms0 <- cms.semi(x = x,
                       y = y,
                       treated = treated0,
                       beta_initial = beta_guess0,
@@ -220,7 +220,7 @@ semipar_imputation <- function(x,
   if (verbose) {
     cat("\nImputing treated values\n")
   }
-  m1 <- impute(x = x,
+  m1 <- imp.val(x = x,
                y = y,
                treated = treated1,
                beta_hat = beta1_hat,
@@ -236,7 +236,7 @@ semipar_imputation <- function(x,
   if (verbose) {
     cat("\nImputing untreated values\n")
   }
-  m0 <- impute(x = x,
+  m0 <- imp.val(x = x,
                y = y,
                treated = treated0,
                beta_hat = beta0_hat,
