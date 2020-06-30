@@ -12,7 +12,9 @@
 #'         imputed treated values vs CMS (pl_m1), and imputed untreated values
 #'         vs CMS (pl_m0).
 #' @import ggplot2
+#' 
 #' @export
+#' 
 #'
 #' @examples
 #' # Using example data from package SDRcausal
@@ -32,9 +34,9 @@
 #'            bwc_dim_red0 = 1, bwc_impute0 = 1)
 #'
 #' # Plotting
-#' plots <- plot.imp(x, y, trt, imp)
+#' plots <- plot_imp(x, y, trt, imp)
 #'
-plot.imp <- function(x,
+plot_imp <- function(x,
                      y,
                      treated,
                      imp)
@@ -122,7 +124,9 @@ plot.imp <- function(x,
 #' @return ggplot plot of the propensity score vs CMS.
 #'
 #' @import ggplot2
+#' 
 #' @export
+#' 
 #'
 #' @examples
 #' # Using example data from package SDRcausal
@@ -137,14 +141,13 @@ plot.imp <- function(x,
 #' alp <- SDRcausal::alpha_guess
 #'
 #' # Perform semiparametric imputation
-#' ipw <- SDRcausal::ipw.ate(x, y, trt, b1, b0,
-#'            explicit_bandwidth = TRUE, bwc_dim_red1 = 1, bwc_impute1 = 1,
-#'            bwc_dim_red0 = 1, bwc_impute0 = 1)
+#' ipw <- SDRcausal::ipw.ate(x, y, trt, alp, bwc_dim_red = 8,
+#'            bwc_prop_score = 8)
 #'
 #' # Plotting
-#' plots <- plot.ipw(x, y, trt, ipw)
+#' plots <- plot_ipw(trt, ipw)
 #'
-plot.ipw <- function(treated,
+plot_ipw <- function(treated,
                      ipw)
 {
   #stopifnot("ggplot2" %in% (.packages()))

@@ -9,13 +9,13 @@ plot_ipw(treated, ipw)
 \arguments{
 \item{treated}{Binary vetor indicating treatment}
 
-\item{ipw}{ipw_output object from semipar_ipw()}
+\item{ipw}{ipw_output object from ipw.ate()}
 }
 \value{
 ggplot plot of the propensity score vs CMS.
 }
 \description{
-Plot function for visualisation of IPW output from semipar_ipw.
+Plot function for visualisation of IPW output from ipw.ate.
              Note: The function requires ggplot2.
 }
 \examples{
@@ -31,11 +31,10 @@ b0 <- SDRcausal::beta0_guess
 alp <- SDRcausal::alpha_guess
 
 # Perform semiparametric imputation
-imp <- SDRcausal::semipar_imputation(x, y, trt, b1, b0,
-           explicit_bandwidth = TRUE, bwc_dim_red1 = 1, bwc_impute1 = 1,
-           bwc_dim_red0 = 1, bwc_impute0 = 1)
+ipw <- SDRcausal::ipw.ate(x, y, trt, alp, bwc_dim_red = 8,
+           bwc_prop_score = 8)
 
 # Plotting
-plots <- plot_imp(x, y, trt, imp)
+plots <- plot_ipw(trt, ipw)
 
 }

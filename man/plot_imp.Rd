@@ -13,7 +13,7 @@ plot_imp(x, y, treated, imp)
 
 \item{treated}{Binary vetor indicating treatment}
 
-\item{imp}{imp_output object from semipar_imputation()}
+\item{imp}{imp_output object from imp.ate()}
 }
 \value{
 A list of ggplot plots of observed and imputed values (pl_imp),
@@ -22,7 +22,7 @@ A list of ggplot plots of observed and imputed values (pl_imp),
 }
 \description{
 Plot function for visualisation of imputation output from
-             semipar_imputation. Note: The function requires ggplot2.
+             imp.ate. Note: The function requires ggplot2.
 }
 \examples{
 # Using example data from package SDRcausal
@@ -37,7 +37,7 @@ b0 <- SDRcausal::beta0_guess
 alp <- SDRcausal::alpha_guess
 
 # Perform semiparametric imputation
-imp <- SDRcausal::semipar_imputation(x, y, trt, b1, b0,
+imp <- SDRcausal::imp.ate(x, y, trt, b1, b0,
            explicit_bandwidth = TRUE, bwc_dim_red1 = 1, bwc_impute1 = 1,
            bwc_dim_red0 = 1, bwc_impute0 = 1)
 
