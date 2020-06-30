@@ -1,7 +1,7 @@
 #' @title Estimates propensity score
 #'
 #' @description Semiparametric estimation of the propensity score as in Ghosh,
-#'              Ma, & De Luna (2020). To be used with SDRcausal::ipw_dim_red().
+#'              Ma, & De Luna (2020). To be used with SDRcausal::cms.ps.semi().
 #'
 #' @param x                  Covariate matrix
 #' @param treated            Binary vetor indicating treatment
@@ -37,14 +37,14 @@
 #' alp <- SDRcausal::alpha_guess
 #'
 #' # Perform semiparametric dimension reduction
-#' cms <- SDRcausal::ipw_dim_red(x, trt, alp,
+#' cms <- SDRcausal::cms.ps.semi(x, trt, alp,
 #'            explicit_bandwidth = TRUE, bandwidth_scale = 8)
 #'
 #' # Estimate propensity score
-#' pr_score <- SDRcausal::propensity_score(x, trt, cms$fa,
+#' pr_score <- SDRcausal::ps.semi(x, trt, cms$fa,
 #'                bandwidth_scale = 8)
 #'
-propensity_score <- function(x,
+ps.semi <- function(x,
                              treated,
                              alpha_hat,
                              kernel = "EPAN",

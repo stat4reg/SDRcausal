@@ -5,8 +5,8 @@
 #'
 #' @param y       Observed response
 #' @param treated Binary vetor indicating treatment
-#' @param imp     imp_output object from semipar_imputation()
-#' @param ipw     ipw_output object from semipar_ipw()
+#' @param imp     imp_output object from imp.ate()
+#' @param ipw     ipw_output object from ipw.ate()
 #'
 #' @return Average treatment effect (ATE) for the improved augmented IPW
 #'         (IAIPW)
@@ -32,21 +32,21 @@
 #' alp <- SDRcausal::alpha_guess
 #'
 #' # Perform semiparametric imputation
-#' imp <- SDRcausal::semipar_imputation(x, y, trt, b1, b0,
+#' imp <- SDRcausal::imp.ate(x, y, trt, b1, b0,
 #'            explicit_bandwidth = TRUE, bwc_dim_red1 = 1, bwc_impute1 = 1,
 #'            bwc_dim_red0 = 1, bwc_impute0 = 1)
 #'
 #' # Perform semiparametric inverse probability weighting
-#' ipw <- SDRcausal::semipar_ipw(x, y, trt, alp, bwc_dim_red = 10,
+#' ipw <- SDRcausal::ipw.ate(x, y, trt, alp, bwc_dim_red = 10,
 #'            bwc_prop_score = 18)
 #'
-#' # Calculate the variance of the Augmented IPW (AIPW)
-#' iaipw <- SDRcausal::improved_augmented_ipw(y, trt, imp, ipw)
+#' # Calculate the Improved Augmented IPW (AIPW2)
+#' iaipw <- SDRcausal::aipw2.ate(y, trt, imp, ipw)
 #'
-improved_augmented_ipw <- function(y,
-                                   treated,
-                                   imp,
-                                   ipw)
+aipw2.ate <- function(y,
+                      treated,
+                      imp,
+                      ipw)
 {
   m1 <- imp$m1$m
   m0 <- imp$m0$m
