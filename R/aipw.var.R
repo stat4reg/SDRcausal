@@ -53,11 +53,11 @@
 #'            bwc_prop_score = 18)
 #'
 #' # Calculate the variance of the Augmented IPW (AIPW)
-#' var <- SDRcausal::aipw_var(x, y, trt, imp, ipw,
+#' var <- SDRcausal::aipw.var(x, y, trt, imp, ipw,
 #'            bandwidth_scale1 = imp$bw1, bandwidth_scale0 = imp$bw0,
 #'            bandwidth_scale_pr = ipw$bw_pr)
 #'
-aipw_var <- function(x,
+aipw.var <- function(x,
                           y,
                           treated,
                           imp,
