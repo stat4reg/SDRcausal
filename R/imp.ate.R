@@ -268,6 +268,6 @@ imp.ate <- function(x,
                  beta0_hat = beta0_hat,
                  bw1 = m1$bw,
                  bw0 = m0$bw)
-
+  class(output) <- 'imp'
   return(output)
 }

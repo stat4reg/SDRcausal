@@ -184,6 +184,6 @@ ipw.ate <- function(x,
                  optim_op = cms$op,
                  bw_dr = cms$bw,
                  bw_pr = prop_score$bw)
-
+  class(output) <- 'ipw'
   return(output)
 }
