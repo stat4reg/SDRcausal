@@ -3,10 +3,11 @@
 #' @description Plot function for visualisation of imputation output from
 #'              imp.ate. Note: The function requires ggplot2.
 #'
-#' @param x                   Covariate matrix
+#' @param covariates          Covariate matrix
 #' @param y                   Response vector
 #' @param treated             Binary vetor indicating treatment
-#' @param imp                 imp_output object from imp.ate()
+#' @param x                   imp_output object from imp.ate()
+#' @param ... Other parameters
 #'
 #' @return A list of ggplot plots of observed and imputed values (pl_imp),
 #'         imputed treated values vs CMS (pl_m1), and imputed untreated values
@@ -21,7 +22,7 @@
 #' library(SDRcausal)
 #'
 #' # Import example data
-#' x <- SDRcausal::covariates
+#' covariates <- SDRcausal::covariates
 #' y <- SDRcausal::outcomes
 #' trt <- SDRcausal::treated
 #' b1 <- SDRcausal::beta1_guess
@@ -29,27 +30,26 @@
 #' alp <- SDRcausal::alpha_guess
 #'
 #' # Perform semiparametric imputation
-#' imp <- SDRcausal::imp.ate(x, y, trt, b1, b0,
+#' imp <- SDRcausal::imp.ate(covariates, y, trt, b1, b0,
 #'            explicit_bandwidth = TRUE, bwc_dim_red1 = 1, bwc_impute1 = 1,
 #'            bwc_dim_red0 = 1, bwc_impute0 = 1)
 #'
 #' # Plotting
-#' plots <- plot_imp(x, y, trt, imp)
+#' plots <- plot(imp , covariates = covariates, y=y, treated = trt)
 #'
-plot_imp <- function(x,
+plot.imp <- function(x , ... , covariates,
                      y,
-                     treated,
-                     imp)
+                     treated)
 {
   #stopifnot("ggplot2" %in% (.packages()))
-
+  imp = x
   # Number of observations
   n <- length(y)
   n_seq <- seq(1, n)
 
   # CMS projections of covariate matrix
-  xb1 <- x %*% imp$beta1_hat
-  xb0 <- x %*% imp$beta0_hat
+  xb1 <- covariates %*% imp$beta1_hat
+  xb0 <- covariates %*% imp$beta0_hat
 
   # Treated vector as boolean
   tbl <- as.logical(treated)
@@ -119,8 +119,10 @@ plot_imp <- function(x,
 #'              Note: The function requires ggplot2.
 #'
 #' @param treated             Binary vetor indicating treatment
-#' @param ipw                 ipw_output object from ipw.ate()
-#'
+#' @param x                ipw_output object from ipw.ate()
+#' @param covariates          Covariate matrix
+#' @param ...                 Other parameters
+#' 
 #' @return ggplot plot of the propensity score vs CMS.
 #'
 #' @import ggplot2
@@ -133,7 +135,7 @@ plot_imp <- function(x,
 #' library(SDRcausal)
 #'
 #' # Import example data
-#' x <- SDRcausal::covariates
+#' covariates <- SDRcausal::covariates
 #' y <- SDRcausal::outcomes
 #' trt <- SDRcausal::treated
 #' b1 <- SDRcausal::beta1_guess
@@ -141,19 +143,19 @@ plot_imp <- function(x,
 #' alp <- SDRcausal::alpha_guess
 #'
 #' # Perform semiparametric imputation
-#' ipw <- SDRcausal::ipw.ate(x, y, trt, alp, bwc_dim_red = 8,
+#' ipw <- SDRcausal::ipw.ate(covariates, y, trt, alp, bwc_dim_red = 8,
 #'            bwc_prop_score = 8)
 #'
 #' # Plotting
-#' plots <- plot_ipw(trt, ipw)
+#' plots <- plot(ipw, treated = trt, covariates = covariates)
 #'
-plot_ipw <- function(treated,
-                     ipw)
+plot.ipw <- function(x, ..., treated,
+                     covariates)
 {
   #stopifnot("ggplot2" %in% (.packages()))
-
+  ipw = x
   # CMS projections of covariate matrix
-  xa <- x %*% ipw$alpha_hat
+  xa <- covariates %*% ipw$alpha_hat
 
   pl <- ggplot(, aes(x = xa)) +
     geom_point(aes(y = ipw$pr, color = "propensity score"), alpha = 0.4,
