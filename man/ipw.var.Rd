@@ -10,11 +10,11 @@ ipw.var(
   treated,
   imp,
   ipw,
-  bandwidth_scale,
+  bandwidth_scale = ipw$bw_dr,
   kernel = "EPAN",
   explicit_bandwidth = TRUE,
   gauss_cutoff = 0.001,
-  num_deriv_h = 0.001,
+  num_deriv_h = 1e-06,
   verbose = FALSE
 )
 }

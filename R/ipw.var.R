@@ -58,11 +58,11 @@ ipw.var <- function(x,
                          treated,
                          imp,
                          ipw,
-                         bandwidth_scale,
+                         bandwidth_scale = ipw$bw_dr,
                          kernel = "EPAN",
                          explicit_bandwidth = TRUE,
                          gauss_cutoff = 1e-3,
-                         num_deriv_h = 1e-3,
+                         num_deriv_h = 1e-6,
                          verbose = FALSE)
 {
   # Deriving parameters from input

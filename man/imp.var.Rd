@@ -10,8 +10,8 @@ imp.var(
   treated,
   imp,
   ipw,
-  bandwidth_scale1,
-  bandwidth_scale0,
+  bandwidth_scale1 = imp$bw1,
+  bandwidth_scale0 = imp$bw0,
   kernel = "EPAN",
   explicit_bandwidth = TRUE,
   gauss_cutoff = 0.001
