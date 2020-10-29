@@ -9,6 +9,7 @@ ipw.ate(
   y,
   treated,
   alpha_initial,
+  solver = "optim",
   kernel = "EPAN",
   explicit_bandwidth = FALSE,
   recalc_bandwidth = TRUE,
