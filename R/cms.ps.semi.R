@@ -271,7 +271,7 @@ cms.ps.semi <- function(x,
     }
 
     # Performing minimization
-    cobyla_output <- cobyla(x0 = alpha_guess,
+    cobyla_output <- nloptr::cobyla(x0 = alpha_guess,
                             fn = dr_fun,
                             params = params,
                             ...)
