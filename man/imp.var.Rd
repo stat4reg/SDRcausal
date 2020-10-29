@@ -22,25 +22,21 @@ imp.var(
 
 \item{y}{Response vector}
 
-\item{treated}{Binary vetor indicating treatment}
+\item{treated}{A binary vetor indicating treatment}
 
-\item{imp}{imp_output object from imp.ate()}
+\item{imp}{imp output object from \code{imp.ate()}}
 
-\item{ipw}{ipw_output object from ipw.ate()}
+\item{ipw}{ipw output object from \code{ipw.ate()}}
 
-\item{bandwidth_scale1}{Scaling of the calculated bandwidth, or in case
-explicit_bandwidth the actual bandwidth. For m1
-and beta1.}
+\item{bandwidth_scale1}{Scaling of the calculated bandwidth, or in case of \code{explicit_bandwidth = TRUE}, the actual bandwidth for the estimations of \eqn{E(.|\beta_1^T X)}. The default value is \code{imp$bw1}.}
 
-\item{bandwidth_scale0}{See bandwidth_scale1. For m0 and beta0.}
+\item{bandwidth_scale0}{Scaling of the calculated bandwidth, or in case of \code{explicit_bandwidth = TRUE}, the actual bandwidth for the estimations of \eqn{E(.|\beta_0^T X)}. The default value is \code{imp$bw0}.}
 
-\item{kernel}{Specifies which kernel function to be used}
+\item{kernel}{Specifies which kernel function to be used. The default one is "EPAN".}
 
-\item{explicit_bandwidth}{Specifies if bandwidth_scale will be used as the
-bandwidth or if it will be calculated as bw =
-bandwidth_scale * sd(x * beta) * n^(1/3).}
+\item{explicit_bandwidth}{Specifies if bandwidth_scale will be used as the bandwidth or if it will be calculated as bw = bandwidth_scale * sd(\eqn{\beta_t^T x}) * \eqn{n^{(1/5)}}.}
 
-\item{gauss_cutoff}{Cutoff value for Gaussian kernel}
+\item{gauss_cutoff}{Cutoff value for Gaussian kernel. The default value is 1e-3.}
 }
 \value{
 Variance of IMP
@@ -69,7 +65,7 @@ imp <- SDRcausal::imp.ate(x, y, trt, b1, b0,
 ipw <- SDRcausal::ipw.ate(x, y, trt, alp, bwc_dim_red = 10,
            bwc_prop_score = 18)
 
-# Calculate the variance of the Augmented IPW (AIPW)
+# Calculate the variance of the IMP estimator.
 var <- SDRcausal::imp.var(x, y, trt, imp, ipw,
            bandwidth_scale1 = imp$bw1, bandwidth_scale0 = imp$bw0)
 

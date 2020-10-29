@@ -6,7 +6,7 @@
 #'
 #' @param x                   Covariate matrix
 #' @param y                   Response vector
-#' @param treated1            Binary vector indicating treatment.
+#' @param treated            Binary vector indicating treatment.
 #' @param beta_guess1         Initial guess of beta for m1
 #' @param beta_guess0         Initial guess of beta for m0
 #' @param imp.solver              Specifies which solver to be used. Current options
@@ -72,8 +72,11 @@
 #'                           probabilities outside (0, 1).
 #' @param ipw.n_before_pen       Number of probabilities outside the range (0, 1)
 #'                           to accept during dimension reduction.
-#' 
-#' @param ...                Additional parameters passed to optim.
+#' @param ipw.solver         Specifies which solver to be used. Current options
+#'                            optim and cobyla (from nloptr package).
+#' @param imp.solver.options Additional parameters passed to optim for imp.
+#' @param ipw.solver.options Additional parameters passed to optim for ipw.
+#'
 #'
 #'
 #'
@@ -104,7 +107,7 @@
 #' trt <- SDRcausal::treated
 #' b1 <- SDRcausal::beta1_guess
 #' b0 <- SDRcausal::beta0_guess
-#' a <- SDRcausal::alpha_initial
+#' a <- SDRcausal::alpha_guess
 #'
 #' # Perform semiparametric imputation
 #' inf.ate <- SDRcausal::inf.ate(x, y, trt, b1, b0, alpha_initial = a)

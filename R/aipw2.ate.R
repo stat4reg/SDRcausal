@@ -1,15 +1,15 @@
-#' @title Improved Augmented IPW (IAIPW)
+#' @title Improved Augmented IPW (AIPW2)
 #'
 #' @description Combines IPW and IMP estimators to form the improved augmented
-#'              IPW, IAIPW as in Ghosh, Ma, & De Luna (2020).
+#'              IPW, AIPW2 as in Ghosh, Ma, & De Luna (2020).
 #'
 #' @param y       Observed response
 #' @param treated Binary vetor indicating treatment
-#' @param imp     imp_output object from imp.ate()
-#' @param ipw     ipw_output object from ipw.ate()
+#' @param imp     imp output object from \code{imp.ate()}
+#' @param ipw     ipw output object from \code{ipw.ate()}
 #'
 #' @return Average treatment effect (ATE) for the improved augmented IPW
-#'         (IAIPW)
+#'         (AIPW2)
 #'
 #' @export
 #'
@@ -41,7 +41,7 @@
 #'            bwc_prop_score = 18)
 #'
 #' # Calculate the Improved Augmented IPW (AIPW2)
-#' iaipw <- SDRcausal::aipw2.ate(y, trt, imp, ipw)
+#' aipw2 <- SDRcausal::aipw2.ate(y, trt, imp, ipw)
 #'
 aipw2.ate <- function(y,
                       treated,

@@ -6,16 +6,13 @@
 #' @param x                   Covariate matrix
 #' @param y                   Response vector
 #' @param treated             Binary vetor indicating treatment
-#' @param imp                 imp_output object from imp.ate()
-#' @param ipw                 ipw_output object from ipw.ate()
-#' @param treated             Binary vetor indicating treatment
-#' @param bandwidth_scale1    Scaling of the calculated bandwidth, m1
-#' @param bandwidth_scale0    Scaling of the calculated bandwidth, m0
-#' @param bandwidth_scale_pr  Scaling of the calculated bandwidth, pr
+#' @param imp                 imp output object from \code{imp.ate()}
+#' @param ipw                 ipw output object from \code{ipw.ate()}
+#' @param bandwidth_scale1    Scaling of the calculated bandwidth, or in case of \code{explicit_bandwidth = TRUE}, the actual bandwidth for the estimations of \eqn{E(.|\beta_1^T X)}. The default value is \code{imp$bw1}.
+#' @param bandwidth_scale0    Scaling of the calculated bandwidth, or in case of \code{explicit_bandwidth = TRUE}, the actual bandwidth for the estimations of \eqn{E(.|\beta_0^T X)}. The default value is \code{imp$bw0}.
+#' @param bandwidth_scale_pr  Scaling of the calculated bandwidth, or in case of \code{explicit_bandwidth = TRUE}, the actual bandwidth for the estimations of \eqn{E(.|\alpha^T X)}. The default value is \code{ipw$bw_dr}.
 #' @param kernel              Specifies which kernel function to be used
-#' @param explicit_bandwidth  Specifies if bandwidth_scale will be used as the
-#'                            bandwidth or if it will be calculated as bw =
-#'                            bandwidth_scale * sd(x * beta) * n^(1/5).
+#' @param explicit_bandwidth  Specifies if bandwidth_scale will be used as the bandwidth or if it will be calculated as bw = bandwidth_scale * sd(\eqn{\beta^T x}) * \eqn{n^{(1/5)}.}
 #' @param gauss_cutoff        Cutoff value for Gaussian kernel
 #' @param num_deriv_h         Step size of numerical derivative.
 #' @param verbose             Specifies if the program should print output

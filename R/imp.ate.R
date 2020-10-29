@@ -7,46 +7,25 @@
 #' @param x                   Covariate matrix
 #' @param y                   Response vector
 #' @param treated1            Binary vector indicating treatment.
-#' @param beta_guess1         Initial guess of beta for m1
-#' @param beta_guess0         Initial guess of beta for m0
-#' @param solver              Specifies which solver to be used. Current options
-#'                            optim and cobyla (from nloptr package).
-#' @param kernel              Specifies which kernel function to be used,
-#'                            current options are: "EPAN", "QUARTIC", and
-#'                            "GAUSSIAN".
-#' @param explicit_bandwidth  Specifies if bandwidth_scale will be used as the
-#'                            bandwidth or if it will be calculated as bw =
-#'                            bandwidth_scale * sd(x * beta) * n^(1/3).
-#' @param recalc_bandwidth    Specifies wheter the bandwidth should be
-#'                            recalculated after the estimation of alpha
-#'                            (cms.ps.semi).
-#' @param bwc_dim_red1        Scaling of calculated bandwidth, or if
-#'                            explicit_bandwidth = TRUE used as the banddwidth.
-#'                            For dimension reduction (cms.semi).
-#' @param bwc_dim_red0        See bwc_dim_red1
-#' @param bwc_impute1         Scaling of calculated bandwidth, or if
-#'                            explicit_bandwidth = TRUE used as the banddwidth.
-#'                            Recalculated if explicit_bandwidth = FALSE and
-#'                            recalc_bandwidth = TRUE. For imputation.
-#' @param bwc_impute0         See bwc_impute1
-#' @param gauss_cutoff        Cutoff value for Gaussian kernel
-#' @param penalty             Penalty for the optimizer if local linear
-#'                            regression fails. Added to the function value in
-#'                            solver as: penalty^(n - n_before_pen), where n is
-#'                            the number of llr fails.
-#' @param n_before_pen        Number of probabilities outside the range (0, 1)
-#'                            to accept during dimension reduction.
-#' @param to_extrapolate      Specifies wheter to extrapolate or not
-#' @param to_truncate         Specifies wheter to extrapolate or not
-#' @param extrapolation_basis Number of data point to base extrapolation on.
-#' @param n_threads           Sets number of threads for parallel run. Set to 0
-#'                            serial. If n_threads exceeds maximum number of
-#'                            threads, sets n_threads to max_threads - 1. To
-#'                            use max_threads, set to n_threads to max_threads
-#'                            of system.
-#' @param verbose             Specifies if the program should print output
-#'                            while running.
-#' @param ...                Additional parameters passed to optim.
+#' @param beta_guess1         Initial guess for \eqn{\beta_1}
+#' @param beta_guess0         Initial guess for \eqn{\beta_0}
+#' @param solver              Specifies which solver is to be used. Current options optim and cobyla (from nloptr package). The diffault value is 'optim'.
+#' @param kernel              Specifies which kernel function is to be used, current options are: "EPAN", "QUARTIC", and "GAUSSIAN". The default value is "EPAN".
+#' @param explicit_bandwidth  Specifies if bandwidth_scale will be used as the bandwidth or if it will be calculated as bw = bandwidth_scale  sd(\eqn{\beta^T x})  \eqn{n^{(1/5)}}. The default value is \code{FALSE}.
+#' @param recalc_bandwidth    Specifies whether the bandwidth should be recalculated after the first stage (the estimations of dimension reduction step). If the \code{explicit_bandwidth} is \code{TRUE}, it is not useful, but if the \code{explicit_bandwidth} is \code{FALSE}, then if \code{recalc_bandwidth} is \code{TRUE}, bandwidths are recalculated at the beginning of the second step based on \code{bwc_impute0} and \code{bwc_impute1}. If \code{recalc_bandwidth} is \code{FALSE}, the first step bandwidths are used. The default value is \code{FALSE}. 
+#' @param bwc_dim_red1        Scaling of calculated bandwidth, or if \code{explicit_bandwidth = TRUE} used as the bandwidth. It is used in the dimension reduction step for \eqn{\hat{m}_1(\beta_1^T x)}. The default value is 1.
+#' @param bwc_dim_red0        Scaling of calculated bandwidth, or if \code{explicit_bandwidth = TRUE} used as the bandwidth. It is used in the dimension reduction step for \eqn{\hat{m}_0(\beta_0^T x)}. The default value is 1.
+#' @param bwc_impute1         Scaling of calculated bandwidth, or if \code{explicit_bandwidth = TRUE} used as the bandwidth. It is used in the imputation step for \eqn{\hat{m}_1(\beta_1^T x)}. The default  value is 1.25.
+#' @param bwc_impute0         Scaling of calculated bandwidth, or if \code{explicit_bandwidth = TRUE} used as the bandwidth. It is used in the imputation step for \eqn{\hat{m}_0(\beta_0^T x)}. The default value is 1.25.
+#' @param gauss_cutoff        The cutoff value for Gaussian kernel. The default value is 1e-3.
+#' @param penalty             Penalty for the optimizer if local linear regression fails. Added to the function value in solver as penalty^(n - n_before_pen), where n is the number of times local linear regression fails. The default value is 10.
+#' @param n_before_pen        The number of acceptable local linear regression failure times during dimension reduction. The default value is 5.
+#' @param to_extrapolate      Specifies whether to extrapolate or not. Since in \eqn{\hat{m}_0(\beta_0^T x)} and \eqn{\hat{m}_1(\beta_1^T x)} estimates in terms of \eqn{\beta_0} and \eqn{\beta_1}, local linear regression at the boundaries of \eqn{\beta_0} and \eqn{\beta_1} can be very volatile, it is recommended to use extrapolation on those points instead of local linear regression. The default value is \code{TRUE}. 
+#' @param extrapolation_basis The number of data points to base extrapolation on. Extrapolation at border points can be done based on a different number of neighborhood points. \code{extrapolation_basis} is how many are used. The default value is 5.
+#' @param to_truncate         Specifies whether to truncate \eqn{\hat{m}_0(\beta_0^T x)} and \eqn{\hat{m}_1(\beta_1^T x)} or not. After estimating \eqn{\hat{m}_0(\beta_0^T x)} and \eqn{\hat{m}_1(\beta_1^T x)}, if they are outside the range of observed outputs, they are replaced with the minimum and maximum observed outputs. The default value is \code{TRUE}. 
+#' @param n_threads           Sets the number of threads for parallel running. Set to 0 serial. If n_threads exceeds the maximum number of threads, sets n_threads to max_threads - 1. To use max_threads, set to n_threads to max_threads of system. The default value is 1.
+#' @param verbose             Specifies if the program should print output while running. The default value is \code{TRUE}.
+#' @param ...                 Additional parameters passed to optim.
 #'
 #' @return A list containing the average treatment effect of the
 #'         combination of observed and imputed values (ate), the average

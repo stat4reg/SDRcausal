@@ -5,40 +5,20 @@
 #'
 #' @param x                  Covariate matrix
 #' @param y                  Response vector
-#' @param treated            Binary vector indicating treatment.
-#' @param alpha_initial      Initial guess of beta for m1
-#' @param kernel              Specifies which kernel function to be used,
-#'                            current options are: "EPAN", "QUARTIC", and
-#'                            "GAUSSIAN".
-#' @param explicit_bandwidth Specifies if bandwidth_scale will be used as the
-#'                           bandwidth or if it will be calculated as bw =
-#'                           bandwidth_scale * sd(x * beta) * n^(1/3).
-#' @param recalc_bandwidth   Specifies wheter the bandwidth should be
-#'                           recalculated after the estimation of alpha
-#'                           (cms.ps.semi)
-#' @param bwc_dim_red        Scaling of calculated bandwidth, or if
-#'                           explicit_bandwidth = TRUE used as the banddwidth.
-#'                           For dimension reduction (cms.ps.semi).
-#' @param bwc_prop_score     Scaling of calculated bandwidth, or if
-#'                           explicit_bandwidth = TRUE used as the banddwidth.
-#'                           Recalculated if explicit_bandwidth = FALSE and
-#'                           recalc_bandwidth = TRUE. For propensity score.
-#' @param gauss_cutoff       cutoff value for Gaussian kernel
-#' @param penalty            Penalty for the optimizer if a probability is
-#'                           outside (0, 1) during dimension reduction. Added
-#'                           to the function value in solver as: penalty^(n -
-#'                           n_before_pen), where n is the number of
-#'                           probabilities outside (0, 1).
-#' @param n_before_pen       Number of probabilities outside the range (0, 1)
-#'                           to accept during dimension reduction.
-#' @param n_threads          Sets number of threads for parallel run. Set to 0
-#'                           serial. If n_threads exceeds maximum number of
-#'                           threads, sets n_threads to max_threads - 1. To
-#'                           use max_threads, set to n_threads to max_threads
-#'                           of system.
-#' @param verbose            Specifies if the program should print output while
-#'                           running.
-#' @param ...                Additional parameters passed to optim.
+#' @param treated            A binary vector indicating treatment.
+#' @param alpha_initial      Initial guess for \eqn{\alpha}
+#' @param solver             Specifies which solver is to be used. Current options optim and cobyla (from nloptr package). The diffault value is 'optim'.
+#' @param kernel             Specifies which kernel function to be used, current options are: "EPAN", "QUARTIC", and "GAUSSIAN". The default one is "EPAN".
+#' @param explicit_bandwidth Specifies if bandwidth_scale will be used as the bandwidth or if it will be calculated as bw = bandwidth_scale * sd(\eqn{\alpha^T x}) * \eqn{n^{1/5}}. The default value is \code{FALSE}.
+#' @param recalc_bandwidth   Specifies whether the bandwidth should be recalculated after the estimation of \eqn{\alpha} (the estimation of dimension reduction step). If the \code{explicit_bandwidth} is \code{TRUE}, it is not useful, but if the \code{explicit_bandwidth} is \code{FALSE}, then if \code{recalc_bandwidth} is \code{TRUE}, bandwidth is recalculated at the beginning of the second step based on \code{bwc_prop_score}. If \code{recalc_bandwidth} is \code{FALSE}, the first step bandwidth is used. The default value is \code{TRUE}.
+#' @param bwc_dim_red        Scaling of calculated bandwidth, or if \code{explicit_bandwidth = TRUE} used as the bandwidth. It is used in the dimension reduction step for \eqn{\alpha^T x}. The default value is 1.
+#' @param bwc_prop_score     Scaling of calculated bandwidth, or if \code{explicit_bandwidth = TRUE} used as the bandwidth. It is used for the estimation of the propensity score. The default value is 10.
+#' @param gauss_cutoff       The cutoff value for Gaussian kernel. The default value is 1e-3.
+#' @param penalty            Penalty for the optimizer if a probability is outside (0, 1) during dimension reduction. Added to the function value in solver as penalty^(n - n_before_pen), where n is the number of probabilities outside (0, 1). The default value is 10.
+#' @param n_before_pen       The number of probabilities outside the range (0, 1) to accept during dimension reduction. The default value is 1.
+#' @param n_threads          The number of threads for parallel running. Set it to 0 for serial. If n_threads exceeds the maximum number of threads,  n_threads is set to max_threads - 1. To use max_threads, set n_threads to max_threads of the system. The default value is 1.
+#' @param verbose            Specifies if the program should print output while running. The default value if \code{FALSE}.
+#' @param ...                Additional parameters passed to optim or cobyla. 
 #'
 #' @return A list containing the average treatment effect (ate), the propensity
 #'         score (pr), the final alpha (fa), and the output from optim (op).
@@ -62,8 +42,7 @@
 #' alp <- SDRcausal::alpha_guess
 #'
 #' # Perform semiparametric inverse probability weighting
-#' ipw <- SDRcausal::ipw.ate(x, y, trt, alp, bwc_dim_red = 8,
-#'            bwc_prop_score = 8)
+#' ipw <- SDRcausal::ipw.ate(x, y, trt, alp)
 #'
 ipw.ate <- function(x,
                         y,

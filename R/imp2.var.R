@@ -4,20 +4,16 @@
 #'
 #' @param x                   Covariate matrix
 #' @param y                   Response vector
-#' @param treated             Binary vetor indicating treatment
-#' @param imp                 imp_output object from imp.ate()
-#' @param ipw                 ipw_output object from ipw.ate()
-#' @param bandwidth_scale1    Scaling of the calculated bandwidth, or in case
-#'                            explicit_bandwidth the actual bandwidth. For m1
-#'                            and beta1.
-#' @param bandwidth_scale0    See bandwidth_scale1. For m0 and beta0.
-#' @param kernel              Specifies which kernel function to be used
-#' @param explicit_bandwidth  Specifies if bandwidth_scale will be used as the
-#'                            bandwidth or if it will be calculated as bw =
-#'                            bandwidth_scale * sd(x * beta) * n^(1/3).
-#' @param gauss_cutoff        Cutoff value for Gaussian kernel
+#' @param treated             A binary vetor indicating treatment
+#' @param imp                 imp output object from \code{imp.ate()}
+#' @param ipw                 ipw output object from \code{ipw.ate()}
+#' @param bandwidth_scale1    Scaling of the calculated bandwidth, or in case of \code{explicit_bandwidth = TRUE}, the actual bandwidth for the estimations of \eqn{E(.|\beta_1^T X)}. The default value is \code{imp$bw1}.
+#' @param bandwidth_scale0    Scaling of the calculated bandwidth, or in case of \code{explicit_bandwidth = TRUE}, the actual bandwidth for the estimations of \eqn{E(.|\beta_0^T X)}. The default value is \code{imp$bw0}.
+#' @param kernel              Specifies which kernel function to be used. The default one is "EPAN".
+#' @param explicit_bandwidth  Specifies if bandwidth_scale will be used as the bandwidth or if it will be calculated as bw = bandwidth_scale * sd(\eqn{\beta_t^T x}) * \eqn{n^{(1/5)}}.
+#' @param gauss_cutoff        Cutoff value for Gaussian kernel. The default value is 1e-3.
 #'
-#' @return Variance of IMP
+#' @return Variance of IMP2
 #'
 #' @importFrom stats sd
 #'
@@ -48,7 +44,7 @@
 #' ipw <- SDRcausal::ipw.ate(x, y, trt, alp, bwc_dim_red = 10,
 #'            bwc_prop_score = 18)
 #'
-#' # Calculate the variance of the Augmented IPW (AIPW)
+#' # Calculate the variance of the IMP2 estimator.
 #' var <- SDRcausal::imp2.var(x, y, trt, imp, ipw,
 #'            bandwidth_scale1 = imp$bw1, bandwidth_scale0 = imp$bw0)
 #'

@@ -23,26 +23,23 @@ ipw.var(
 
 \item{y}{Response vector}
 
-\item{treated}{Binary vetor indicating treatment}
+\item{treated}{A binary vetor indicating treatment}
 
-\item{imp}{imp_output object from imp.ate()}
+\item{imp}{imp output object from \code{imp.ate()}}
 
-\item{ipw}{ipw_output object from ipw.ate()}
+\item{ipw}{ipw output object from \code{ipw.ate()}}
 
-\item{bandwidth_scale}{Scaling of the calculated bandwidth, or in case of}
+\item{bandwidth_scale}{Scaling of the calculated bandwidth, or in case of \code{explicit_bandwidth = TRUE}, the actual bandwidth for the estimations of \eqn{E(.|\alpha^T X)}. The default value is \code{ipw$bw_dr}.}
 
-\item{kernel}{Specifies which kernel function to be used}
+\item{kernel}{Specifies which kernel function to be used. The default one is "EPAN".}
 
-\item{explicit_bandwidth}{Specifies if bandwidth_scale will be used as the
-bandwidth or if it will be calculated as bw =
-bandwidth_scale * sd(x * beta) * n^(1/3).}
+\item{explicit_bandwidth}{Specifies if bandwidth_scale will be used as the bandwidth or if it will be calculated as bw = bandwidth_scale * sd(\eqn{\alpha^T x}) * \eqn{n^{(1/5)}.}}
 
-\item{gauss_cutoff}{Cutoff value for Gaussian kernel}
+\item{gauss_cutoff}{Cutoff value for Gaussian kernel. The default value is 1e-3.}
 
-\item{num_deriv_h}{Step size of numerical derivative.}
+\item{num_deriv_h}{Step size of numerical derivative. The default value is 1e-6.}
 
-\item{verbose}{Specifies if the program should print output
-while running.}
+\item{verbose}{Specifies if the program should print output while running. The default value if \code{FALSE}.}
 }
 \value{
 The variance of IPW
@@ -73,7 +70,7 @@ ipw <- SDRcausal::ipw.ate(x, y, trt, alp, bwc_dim_red = 10,
 
 # Calculate the variance of the Augmented IPW (AIPW)
 var <- SDRcausal::ipw.var(x, y, trt, imp, ipw,
-           bandwidth_scale = ipw$bw_pr)
+           bandwidth_scale = ipw$bw_dr)
 
 }
 \references{

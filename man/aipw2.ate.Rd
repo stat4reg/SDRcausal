@@ -2,7 +2,7 @@
 % Please edit documentation in R/aipw2.ate.R
 \name{aipw2.ate}
 \alias{aipw2.ate}
-\title{Improved Augmented IPW (IAIPW)}
+\title{Improved Augmented IPW (AIPW2)}
 \usage{
 aipw2.ate(y, treated, imp, ipw)
 }
@@ -11,17 +11,17 @@ aipw2.ate(y, treated, imp, ipw)
 
 \item{treated}{Binary vetor indicating treatment}
 
-\item{imp}{imp_output object from imp.ate()}
+\item{imp}{imp output object from \code{imp.ate()}}
 
-\item{ipw}{ipw_output object from ipw.ate()}
+\item{ipw}{ipw output object from \code{ipw.ate()}}
 }
 \value{
 Average treatment effect (ATE) for the improved augmented IPW
-        (IAIPW)
+        (AIPW2)
 }
 \description{
 Combines IPW and IMP estimators to form the improved augmented
-             IPW, IAIPW as in Ghosh, Ma, & De Luna (2020).
+             IPW, AIPW2 as in Ghosh, Ma, & De Luna (2020).
 }
 \examples{
 # Using example data from package SDRcausal
@@ -45,7 +45,7 @@ ipw <- SDRcausal::ipw.ate(x, y, trt, alp, bwc_dim_red = 10,
            bwc_prop_score = 18)
 
 # Calculate the Improved Augmented IPW (AIPW2)
-iaipw <- SDRcausal::aipw2.ate(y, trt, imp, ipw)
+aipw2 <- SDRcausal::aipw2.ate(y, trt, imp, ipw)
 
 }
 \references{

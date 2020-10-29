@@ -27,21 +27,19 @@ aipw.var(
 
 \item{treated}{Binary vetor indicating treatment}
 
-\item{imp}{imp_output object from imp.ate()}
+\item{imp}{imp output object from \code{imp.ate()}}
 
-\item{ipw}{ipw_output object from ipw.ate()}
+\item{ipw}{ipw output object from \code{ipw.ate()}}
 
-\item{bandwidth_scale1}{Scaling of the calculated bandwidth, m1}
+\item{bandwidth_scale1}{Scaling of the calculated bandwidth, or in case of \code{explicit_bandwidth = TRUE}, the actual bandwidth for the estimations of \eqn{E(.|\beta_1^T X)}. The default value is \code{imp$bw1}.}
 
-\item{bandwidth_scale0}{Scaling of the calculated bandwidth, m0}
+\item{bandwidth_scale0}{Scaling of the calculated bandwidth, or in case of \code{explicit_bandwidth = TRUE}, the actual bandwidth for the estimations of \eqn{E(.|\beta_0^T X)}. The default value is \code{imp$bw0}.}
 
-\item{bandwidth_scale_pr}{Scaling of the calculated bandwidth, pr}
+\item{bandwidth_scale_pr}{Scaling of the calculated bandwidth, or in case of \code{explicit_bandwidth = TRUE}, the actual bandwidth for the estimations of \eqn{E(.|\alpha^T X)}. The default value is \code{ipw$bw_dr}.}
 
 \item{kernel}{Specifies which kernel function to be used}
 
-\item{explicit_bandwidth}{Specifies if bandwidth_scale will be used as the
-bandwidth or if it will be calculated as bw =
-bandwidth_scale * sd(x * beta) * n^(1/5).}
+\item{explicit_bandwidth}{Specifies if bandwidth_scale will be used as the bandwidth or if it will be calculated as bw = bandwidth_scale * sd(\eqn{\beta^T x}) * \eqn{n^{(1/5)}.}}
 
 \item{gauss_cutoff}{Cutoff value for Gaussian kernel}
 

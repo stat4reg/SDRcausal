@@ -45,6 +45,8 @@ inf.ate(
 
 \item{y}{Response vector}
 
+\item{treated}{Binary vector indicating treatment.}
+
 \item{beta_guess1}{Initial guess of beta for m1}
 
 \item{beta_guess0}{Initial guess of beta for m0}
@@ -95,6 +97,9 @@ to accept during dimension reduction.}
 
 \item{alpha_initial}{Initial guess of beta for m1}
 
+\item{ipw.solver}{Specifies which solver to be used. Current options
+optim and cobyla (from nloptr package).}
+
 \item{ipw.kernel}{Specifies which kernel function to be used,
 current options are: "EPAN", "QUARTIC", and
 "GAUSSIAN".}
@@ -136,9 +141,9 @@ of system.}
 \item{verbose}{Specifies if the program should print output
 while running.}
 
-\item{treated1}{Binary vector indicating treatment.}
+\item{imp.solver.options}{Additional parameters passed to optim for imp.}
 
-\item{...}{Additional parameters passed to optim.}
+\item{ipw.solver.options}{Additional parameters passed to optim for ipw.}
 }
 \value{
 A list containing the average treatment effect of the
@@ -162,7 +167,7 @@ y <- SDRcausal::outcomes
 trt <- SDRcausal::treated
 b1 <- SDRcausal::beta1_guess
 b0 <- SDRcausal::beta0_guess
-a <- SDRcausal::alpha_initial
+a <- SDRcausal::alpha_guess
 
 # Perform semiparametric imputation
 inf.ate <- SDRcausal::inf.ate(x, y, trt, b1, b0, alpha_initial = a)

@@ -4,8 +4,8 @@
 #'
 #' @param y       Observed response
 #' @param treated Binary vetor indicating treatment
-#' @param imp     imp_output object from imp.ate()
-#' @param ipw     ipw_output object from ipw.ate()
+#' @param imp     imp output object from \code{imp.ate()}
+#' @param ipw     ipw output object from \code{ipw.ate()}
 #'
 #' @return Average treatment effect (ATE) for the augmented IPW (AIPW)
 #'

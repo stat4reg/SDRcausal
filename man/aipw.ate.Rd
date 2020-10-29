@@ -11,9 +11,9 @@ aipw.ate(y, treated, imp, ipw)
 
 \item{treated}{Binary vetor indicating treatment}
 
-\item{imp}{imp_output object from imp.ate()}
+\item{imp}{imp output object from \code{imp.ate()}}
 
-\item{ipw}{ipw_output object from ipw.ate()}
+\item{ipw}{ipw output object from \code{ipw.ate()}}
 }
 \value{
 Average treatment effect (ATE) for the augmented IPW (AIPW)
