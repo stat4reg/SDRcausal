@@ -165,8 +165,7 @@ plot.ipw <- function(x, ..., treated,
     geom_point(aes(y = ipw$pr, color = "propensity score"), alpha = 0.4,
                size = 3) +
     geom_line(aes(y = ipw$pr), alpha = 0.6) +
-    geom_point(aes(y = treated, color = "treatment"), color = "black",
-               alpha = 0.03, size = 4) +
+    geom_point(aes(y = treated, color = "treatment status"), alpha = 0.03, size = 4) +
     xlab("CMS") +
     ylab("Propensity score")
 
