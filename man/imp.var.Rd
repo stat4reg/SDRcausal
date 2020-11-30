@@ -24,22 +24,22 @@ imp.var(
 
 \item{treated}{A binary vetor indicating treatment}
 
-\item{imp}{imp output object from \code{imp.ate()}}
+\item{imp}{imp output object from \code{imp.ate}}
 
-\item{ipw}{ipw output object from \code{ipw.ate()}}
+\item{ipw}{ipw output object from \code{ipw.ate}}
 
-\item{bandwidth_scale1}{Scaling of the calculated bandwidth, or in case of \code{explicit_bandwidth = TRUE}, the actual bandwidth for the estimations of \eqn{E(.|\beta_1^T X)}. The default value is \code{imp$bw1}.}
+\item{bandwidth_scale1}{Scaling of the calculated bandwidth, or in case of \code{explicit_bandwidth = TRUE}, the actual bandwidth for the estimation of \eqn{E(\cdot|\beta_1^T X)}. The default value is \code{imp$bw1}. If this default value is used, one should use the default value \code{TRUE} for \code{explicit_bandwidth}.}
 
-\item{bandwidth_scale0}{Scaling of the calculated bandwidth, or in case of \code{explicit_bandwidth = TRUE}, the actual bandwidth for the estimations of \eqn{E(.|\beta_0^T X)}. The default value is \code{imp$bw0}.}
+\item{bandwidth_scale0}{Scaling of the calculated bandwidth, or in case of \code{explicit_bandwidth = TRUE}, the actual bandwidth for the estimation of \eqn{E(\cdot|\beta_0^T X)}. The default value is \code{imp$bw0}. If this default value is used, one should use the default value \code{TRUE} for \code{explicit_bandwidth}.}
 
-\item{kernel}{Specifies which kernel function to be used. The default one is "EPAN".}
+\item{kernel}{Specifies which kernel function to be used. The default is \code{"EPAN"}.}
 
-\item{explicit_bandwidth}{Specifies if bandwidth_scale will be used as the bandwidth or if it will be calculated as bw = bandwidth_scale * sd(\eqn{\beta_t^T x}) * \eqn{n^{(1/5)}}.}
+\item{explicit_bandwidth}{Specifies if bandwidth_scale will be used as the bandwidth or if it will be calculated as \code{bandwidth_scale} * sd(\eqn{\beta_t^T x}) * \eqn{n^{(1/5)}}. The default value is \code{TRUE}.}
 
-\item{gauss_cutoff}{Cutoff value for Gaussian kernel. The default value is 1e-3.}
+\item{gauss_cutoff}{The cutoff value for Gaussian kernel. The default value is \code{1e-3}.}
 }
 \value{
-Variance of IMP
+Variance of IMP estimator
 }
 \description{
 Variance of the IMP as in Ghosh, Ma, & De Luna (2020).

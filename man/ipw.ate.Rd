@@ -32,29 +32,29 @@ ipw.ate(
 
 \item{alpha_initial}{Initial guess for \eqn{\alpha}}
 
-\item{solver}{Specifies which solver is to be used. Current options optim and cobyla (from nloptr package). The diffault value is 'optim'.}
+\item{solver}{Specifies which solver is to be used. Current options are \code{optim} and \code{cobyla} (from \code{nloptr} package). The diffault value is \code{"optim"}.}
 
-\item{kernel}{Specifies which kernel function to be used, current options are: "EPAN", "QUARTIC", and "GAUSSIAN". The default one is "EPAN".}
+\item{kernel}{Specifies which kernel function is to be used, current options are: \code{"EPAN"}, \code{"QUARTIC"}, and \code{"GAUSSIAN"}. The default value is \code{"EPAN"}.}
 
-\item{explicit_bandwidth}{Specifies if bandwidth_scale will be used as the bandwidth or if it will be calculated as bw = bandwidth_scale * sd(\eqn{\alpha^T x}) * \eqn{n^{1/5}}. The default value is \code{FALSE}.}
+\item{explicit_bandwidth}{Specifies if \code{bandwidth_scale} will be used as the bandwidth or if it will be calculated as \code{bandwidth_scale} * sd(\eqn{\alpha^T x}) * \eqn{n^{(1/5)}}. The default value is \code{FALSE}.}
 
-\item{recalc_bandwidth}{Specifies whether the bandwidth should be recalculated after the estimation of \eqn{\alpha} (the estimation of dimension reduction step). If the \code{explicit_bandwidth} is \code{TRUE}, it is not useful, but if the \code{explicit_bandwidth} is \code{FALSE}, then if \code{recalc_bandwidth} is \code{TRUE}, bandwidth is recalculated at the beginning of the second step based on \code{bwc_prop_score}. If \code{recalc_bandwidth} is \code{FALSE}, the first step bandwidth is used. The default value is \code{TRUE}.}
+\item{recalc_bandwidth}{Specifies whether the bandwidth should be recalculated after the estimations of \eqn{\alpha}. If \code{explicit_bandwidth} is \code{TRUE}, \code{recalc_bandwidth} is not used, but if \code{explicit_bandwidth} is \code{FALSE}, then if \code{recalc_bandwidth} is \code{TRUE}, bandwidths are recalculated at the beginning of the second step based on \code{bwc_prop_score}. If \code{recalc_bandwidth} is \code{FALSE}, the first step bandwidth is used. The default value is \code{TRUE}.}
 
-\item{bwc_dim_red}{Scaling of calculated bandwidth, or if \code{explicit_bandwidth = TRUE} used as the bandwidth. It is used in the dimension reduction step for \eqn{\alpha^T x}. The default value is 1.}
+\item{bwc_dim_red}{Scaling of calculated bandwidth, or if \code{explicit_bandwidth = TRUE} used as the bandwidth. It is used in the dimension reduction step for \eqn{\alpha^T x}. The default value is \code{1}.}
 
-\item{bwc_prop_score}{Scaling of calculated bandwidth, or if \code{explicit_bandwidth = TRUE} used as the bandwidth. It is used for the estimation of the propensity score. The default value is 10.}
+\item{bwc_prop_score}{Scaling of calculated bandwidth, or if \code{explicit_bandwidth = TRUE} used as the bandwidth. It is used for the estimation of the propensity score. The default value is \code{10}.}
 
-\item{gauss_cutoff}{The cutoff value for Gaussian kernel. The default value is 1e-3.}
+\item{gauss_cutoff}{The cutoff value for Gaussian kernel. The default value is \code{1e-3}.}
 
-\item{penalty}{Penalty for the optimizer if a probability is outside (0, 1) during dimension reduction. Added to the function value in solver as penalty^(n - n_before_pen), where n is the number of probabilities outside (0, 1). The default value is 10.}
+\item{penalty}{Penalty for the optimizer if a probability is outside (0, 1) during the estimation of \eqn{\alpha} phase. Added to the function value in solver as \code{penalty}^(n - \code{n_before_pen}), where n is the number of probabilities outside (0, 1). The default value is \code{10}.}
 
-\item{n_before_pen}{The number of probabilities outside the range (0, 1) to accept during dimension reduction. The default value is 1.}
+\item{n_before_pen}{The number of probabilities outside the range (0, 1) to accept during the estimation of \eqn{\alpha} phase. The default value is \code{1}.}
 
-\item{n_threads}{The number of threads for parallel running. Set it to 0 for serial. If n_threads exceeds the maximum number of threads,  n_threads is set to max_threads - 1. To use max_threads, set n_threads to max_threads of the system. The default value is 1.}
+\item{n_threads}{Sets the number of threads for parallel computing. Set to 1 serial. If \code{n_threads} exceeds the maximum number of threads, sets \code{n_threads} to max_threads - 1. To use max_threads, set to \code{n_threads} to max_threads of system. The default value is \code{1}.}
 
-\item{verbose}{Specifies if the program should print output while running. The default value if \code{FALSE}.}
+\item{verbose}{Specifies if the program should print output while running. The default value is \code{FALSE}.}
 
-\item{...}{Additional parameters passed to optim or cobyla.}
+\item{...}{Additional parameters passed to \code{optim} or \code{cobyla}.}
 }
 \value{
 A list containing the average treatment effect (ate), the propensity

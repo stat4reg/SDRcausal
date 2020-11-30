@@ -45,105 +45,67 @@ inf.ate(
 
 \item{y}{Response vector}
 
-\item{treated}{Binary vector indicating treatment.}
+\item{treated}{A binary vector indicating treatment status}
 
-\item{beta_guess1}{Initial guess of beta for m1}
+\item{beta_guess1}{Initial guess for \eqn{\beta_1}}
 
-\item{beta_guess0}{Initial guess of beta for m0}
+\item{beta_guess0}{Initial guess for \eqn{\beta_0}}
 
-\item{imp.solver}{Specifies which solver to be used. Current options
-optim and cobyla (from nloptr package).}
+\item{imp.solver}{Specifies which solver is to be used. Current options are \code{optim} and \code{cobyla} (from \code{nloptr} package). The diffault value is \code{"optim"}.}
 
-\item{imp.kernel}{Specifies which kernel function to be used,
-current options are: "EPAN", "QUARTIC", and
-"GAUSSIAN".}
+\item{imp.kernel}{Specifies which kernel function is to be used, current options are: \code{"EPAN"}, \code{"QUARTIC"}, and \code{"GAUSSIAN"}. The default value is \code{"EPAN"}.}
 
-\item{imp.explicit_bandwidth}{Specifies if bandwidth_scale will be used as the
-bandwidth or if it will be calculated as bw =
-bandwidth_scale * sd(x * beta) * n^(1/3).}
+\item{imp.explicit_bandwidth}{Specifies if \code{bandwidth_scale} will be used as the bandwidth or if it will be calculated as \code{bandwidth_scale} * sd(\eqn{\beta^T x}) * \eqn{n^{(1/5)}}. The default value is \code{FALSE}.}
 
-\item{imp.recalc_bandwidth}{Specifies wheter the bandwidth should be
-recalculated after the estimation of alpha
-(cms.ps.semi).}
+\item{imp.recalc_bandwidth}{Specifies whether the bandwidth should be recalculated after the first stage (the estimations of dimension reduction step). If \code{explicit_bandwidth} is \code{TRUE}, \code{recalc_bandwidth} is not used, but if \code{explicit_bandwidth} is \code{FALSE}, then if \code{recalc_bandwidth} is \code{TRUE}, bandwidths are recalculated at the beginning of the second step based on \code{bwc_impute0} and \code{bwc_impute1}. If \code{recalc_bandwidth} is \code{FALSE}, the first step bandwidths are used. The default value is \code{FALSE}.}
 
-\item{bwc_dim_red1}{Scaling of calculated bandwidth, or if
-explicit_bandwidth = TRUE used as the banddwidth.
-For dimension reduction (cms.semi).}
+\item{bwc_dim_red1}{Scaling of calculated bandwidth, or if \code{explicit_bandwidth = TRUE} used as the bandwidth. It is used in the dimension reduction step for \eqn{\hat{m}_1(\beta_1^T x)}. The default value is \code{1}.}
 
-\item{bwc_impute1}{Scaling of calculated bandwidth, or if
-explicit_bandwidth = TRUE used as the banddwidth.
-Recalculated if explicit_bandwidth = FALSE and
-recalc_bandwidth = TRUE. For imputation.}
+\item{bwc_impute1}{Scaling of calculated bandwidth, or if \code{explicit_bandwidth = TRUE} used as the bandwidth. It is used in the imputation step for \eqn{\hat{m}_1(\beta_1^T x)}. The default  value is \code{1.25}.}
 
-\item{bwc_dim_red0}{See bwc_dim_red1}
+\item{bwc_dim_red0}{Scaling of calculated bandwidth, or if \code{explicit_bandwidth = TRUE} used as the bandwidth. It is used in the dimension reduction step for \eqn{\hat{m}_0(\beta_0^T x)}. The default value is \code{1}.}
 
-\item{bwc_impute0}{See bwc_impute1}
+\item{bwc_impute0}{Scaling of calculated bandwidth, or if \code{explicit_bandwidth = TRUE} used as the bandwidth. It is used in the imputation step for \eqn{\hat{m}_0(\beta_0^T x)}. The default value is \code{1.25}.}
 
-\item{imp.gauss_cutoff}{Cutoff value for Gaussian kernel}
+\item{imp.gauss_cutoff}{The cutoff value for Gaussian kernel. The default value is \code{1e-3}.}
 
-\item{imp.penalty}{Penalty for the optimizer if local linear
-regression fails. Added to the function value in
-solver as: penalty^(n - n_before_pen), where n is
-the number of llr fails.}
+\item{imp.penalty}{Penalty for the optimizer if local linear regression fails. Added to the function value in solver as \code{penalty}^(n - \code{n_before_pen}), where n is the number of times local linear regression fails. The default value is \code{10}.}
 
-\item{imp.n_before_pen}{Number of probabilities outside the range (0, 1)
-to accept during dimension reduction.}
+\item{imp.n_before_pen}{The number of acceptable local linear regression failures during the estimation of \eqn{\beta_0} and \eqn{\beta_1} phase. The default value is \code{5}.}
 
-\item{imp.to_extrapolate}{Specifies wheter to extrapolate or not}
+\item{imp.to_extrapolate}{Specifies whether to extrapolate or not. Since in \eqn{\hat{m}_0(\beta_0^T x)} and \eqn{\hat{m}_1(\beta_1^T x)} estimates in terms of \eqn{\beta_0} and \eqn{\beta_1}, local linear regression at the boundaries of \eqn{\beta_0^Tx} and \eqn{\beta_1^Tx} can be very volatile, it is recommended to use extrapolation on those points instead of local linear regression. The default value is \code{TRUE}.}
 
-\item{imp.to_truncate}{Specifies wheter to extrapolate or not}
+\item{imp.to_truncate}{Specifies whether to truncate \eqn{\hat{m}_0(\beta_0^T x)} and \eqn{\hat{m}_1(\beta_1^T x)} or not. After estimating \eqn{\hat{m}_0(\beta_0^T x)} and \eqn{\hat{m}_1(\beta_1^T x)}, if they are outside the range of observed outputs, they are replaced with the minimum and maximum observed outputs. The default value is \code{TRUE}.}
 
-\item{imp.extrapolation_basis}{Number of data point to base extrapolation on.}
+\item{imp.extrapolation_basis}{The number of data points to base extrapolation on. Extrapolation at border points can be done based on a different number of neighborhood points. \code{extrapolation_basis} is how many neighborhood points are used. The default value is \code{5}.}
 
-\item{alpha_initial}{Initial guess of beta for m1}
+\item{alpha_initial}{Initial guess for \eqn{\alpha}}
 
-\item{ipw.solver}{Specifies which solver to be used. Current options
-optim and cobyla (from nloptr package).}
+\item{ipw.solver}{Specifies which solver is to be used. Current options are \code{optim} and \code{cobyla} (from \code{nloptr} package). The diffault value is \code{"optim"}.}
 
-\item{ipw.kernel}{Specifies which kernel function to be used,
-current options are: "EPAN", "QUARTIC", and
-"GAUSSIAN".}
+\item{ipw.kernel}{Specifies which kernel function is to be used, current options are: \code{"EPAN"}, \code{"QUARTIC"}, and \code{"GAUSSIAN"}. The default value is \code{"EPAN"}.}
 
-\item{ipw.explicit_bandwidth}{Specifies if bandwidth_scale will be used as the
-bandwidth or if it will be calculated as bw =
-bandwidth_scale * sd(x * beta) * n^(1/3).}
+\item{ipw.explicit_bandwidth}{Specifies if \code{bandwidth_scale} will be used as the bandwidth or if it will be calculated as \code{bandwidth_scale} * sd(\eqn{\alpha^T x}) * \eqn{n^{(1/5)}}. The default value is \code{FALSE}.}
 
-\item{ipw.recalc_bandwidth}{Specifies wheter the bandwidth should be
-recalculated after the estimation of alpha
-(cms.ps.semi)}
+\item{ipw.recalc_bandwidth}{Specifies whether the bandwidth should be recalculated after the estimations of \eqn{\alpha}. If \code{explicit_bandwidth} is \code{TRUE}, \code{recalc_bandwidth} is not used, but if \code{explicit_bandwidth} is \code{FALSE}, then if \code{recalc_bandwidth} is \code{TRUE}, bandwidths are recalculated at the beginning of the second step based on \code{bwc_prop_score}. If \code{recalc_bandwidth} is \code{FALSE}, the first step bandwidths are used. The default value is \code{FALSE}.}
 
-\item{bwc_dim_red}{Scaling of calculated bandwidth, or if
-explicit_bandwidth = TRUE used as the banddwidth.
-For dimension reduction (cms.ps.semi).}
+\item{bwc_dim_red}{Scaling of calculated bandwidth, or if \code{explicit_bandwidth = TRUE} used as the bandwidth. It is used in the dimension reduction step for \eqn{\alpha^T x}. The default value is \code{1}.}
 
-\item{bwc_prop_score}{Scaling of calculated bandwidth, or if
-explicit_bandwidth = TRUE used as the banddwidth.
-Recalculated if explicit_bandwidth = FALSE and
-recalc_bandwidth = TRUE. For propensity score.}
+\item{bwc_prop_score}{Scaling of calculated bandwidth, or if \code{explicit_bandwidth = TRUE} used as the bandwidth. It is used for the estimation of the propensity score. The default value is \code{10}.}
 
-\item{ipw.gauss_cutoff}{cutoff value for Gaussian kernel}
+\item{ipw.gauss_cutoff}{The cutoff value for Gaussian kernel. The default value is \code{1e-3}.}
 
-\item{ipw.penalty}{Penalty for the optimizer if a probability is
-outside (0, 1) during dimension reduction. Added
-to the function value in solver as: penalty^(n -
-n_before_pen), where n is the number of
-probabilities outside (0, 1).}
+\item{ipw.penalty}{Penalty for the optimizer if a probability is outside (0, 1) during the estimation of \eqn{\alpha} phase. Added to the function value in solver as \code{penalty}^(n - \code{n_before_pen}), where n is the number of probabilities outside (0, 1). The default value is \code{10}.}
 
-\item{ipw.n_before_pen}{Number of probabilities outside the range (0, 1)
-to accept during dimension reduction.}
+\item{ipw.n_before_pen}{The number of probabilities outside the range (0, 1) to accept during the estimation of \eqn{\alpha} phase. The default value is \code{1}.}
 
-\item{n_threads}{Sets number of threads for parallel run. Set to 0
-serial. If n_threads exceeds maximum number of
-threads, sets n_threads to max_threads - 1. To
-use max_threads, set to n_threads to max_threads
-of system.}
+\item{n_threads}{Sets the number of threads for parallel computing. Set to 1 serial. If \code{n_threads} exceeds the maximum number of threads, sets \code{n_threads} to max_threads - 1. To use max_threads, set to \code{n_threads} to max_threads of system. The default value is \code{1}.}
 
-\item{verbose}{Specifies if the program should print output
-while running.}
+\item{verbose}{Specifies if the program should print output while running. The default value is \code{TRUE}.}
 
-\item{imp.solver.options}{Additional parameters passed to optim for imp.}
+\item{imp.solver.options}{Additional parameters passed to \code{optim} or \code{cobyla} for \code{imp.ate}.}
 
-\item{ipw.solver.options}{Additional parameters passed to optim for ipw.}
+\item{ipw.solver.options}{Additional parameters passed to \code{optim} or \code{cobyla} for \code{ipw.ate}.}
 }
 \value{
 A list containing the average treatment effect of the

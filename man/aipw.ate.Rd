@@ -9,14 +9,14 @@ aipw.ate(y, treated, imp, ipw)
 \arguments{
 \item{y}{Observed response}
 
-\item{treated}{Binary vetor indicating treatment}
+\item{treated}{A binary vetor indicating treatment}
 
-\item{imp}{imp output object from \code{imp.ate()}}
+\item{imp}{imp output object from \code{imp.ate}}
 
-\item{ipw}{ipw output object from \code{ipw.ate()}}
+\item{ipw}{ipw output object from \code{ipw.ate}}
 }
 \value{
-Average treatment effect (ATE) for the augmented IPW (AIPW)
+The AIPW estimation (AIPW) of the average treatment effect (ATE).
 }
 \description{
 Augmented IPW (AIPW) as in Ghosh, Ma, & De Luna (2020).

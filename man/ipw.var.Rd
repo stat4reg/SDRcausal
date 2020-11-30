@@ -25,19 +25,19 @@ ipw.var(
 
 \item{treated}{A binary vetor indicating treatment}
 
-\item{imp}{imp output object from \code{imp.ate()}}
+\item{imp}{imp output object from \code{imp.ate}}
 
-\item{ipw}{ipw output object from \code{ipw.ate()}}
+\item{ipw}{ipw output object from \code{ipw.ate}}
 
-\item{bandwidth_scale}{Scaling of the calculated bandwidth, or in case of \code{explicit_bandwidth = TRUE}, the actual bandwidth for the estimations of \eqn{E(.|\alpha^T X)}. The default value is \code{ipw$bw_dr}.}
+\item{bandwidth_scale}{Scaling of the calculated bandwidth, or in case of \code{explicit_bandwidth = TRUE}, the actual bandwidth for the estimation of \eqn{E(\cdot|\alpha^T X)}. The default value is \code{ipw$bw_dr}. If this default value is used, one should use the default value \code{TRUE} for \code{explicit_bandwidth}.}
 
-\item{kernel}{Specifies which kernel function to be used. The default one is "EPAN".}
+\item{kernel}{Specifies which kernel function to be used. The default is \code{"EPAN"}.}
 
-\item{explicit_bandwidth}{Specifies if bandwidth_scale will be used as the bandwidth or if it will be calculated as bw = bandwidth_scale * sd(\eqn{\alpha^T x}) * \eqn{n^{(1/5)}.}}
+\item{explicit_bandwidth}{Specifies if bandwidth_scale will be used as the bandwidth or if it will be calculated as \code{bandwidth_scale} * sd(\eqn{\alpha^T x}) * \eqn{n^{(1/5)}}. The default value is \code{TRUE}.}
 
-\item{gauss_cutoff}{Cutoff value for Gaussian kernel. The default value is 1e-3.}
+\item{gauss_cutoff}{The cutoff value for Gaussian kernel. The default value is \code{1e-3}.}
 
-\item{num_deriv_h}{Step size of numerical derivative. The default value is 1e-6.}
+\item{num_deriv_h}{Step size of numerical derivative. The default value is \code{1e-6}.}
 
 \item{verbose}{Specifies if the program should print output while running. The default value if \code{FALSE}.}
 }

@@ -34,45 +34,45 @@ imp.ate(
 
 \item{y}{Response vector}
 
-\item{treated1}{Binary vector indicating treatment.}
+\item{treated1}{A binary vector indicating treatment.}
 
 \item{beta_guess1}{Initial guess for \eqn{\beta_1}}
 
 \item{beta_guess0}{Initial guess for \eqn{\beta_0}}
 
-\item{solver}{Specifies which solver is to be used. Current options optim and cobyla (from nloptr package). The diffault value is 'optim'.}
+\item{solver}{Specifies which solver is to be used. Current options are \code{optim} and \code{cobyla} (from \code{nloptr} package). The diffault value is \code{"optim"}.}
 
-\item{kernel}{Specifies which kernel function is to be used, current options are: "EPAN", "QUARTIC", and "GAUSSIAN". The default value is "EPAN".}
+\item{kernel}{Specifies which kernel function is to be used, current options are: \code{"EPAN"}, \code{"QUARTIC"}, and \code{"GAUSSIAN"}. The default value is \code{"EPAN"}.}
 
-\item{explicit_bandwidth}{Specifies if bandwidth_scale will be used as the bandwidth or if it will be calculated as bw = bandwidth_scale  sd(\eqn{\beta^T x})  \eqn{n^{(1/5)}}. The default value is \code{FALSE}.}
+\item{explicit_bandwidth}{Specifies if \code{bandwidth_scale} will be used as the bandwidth or if it will be calculated as \code{bandwidth_scale} * sd(\eqn{\beta^T x}) * \eqn{n^{(1/5)}}. The default value is \code{FALSE}.}
 
-\item{recalc_bandwidth}{Specifies whether the bandwidth should be recalculated after the first stage (the estimations of dimension reduction step). If the \code{explicit_bandwidth} is \code{TRUE}, it is not useful, but if the \code{explicit_bandwidth} is \code{FALSE}, then if \code{recalc_bandwidth} is \code{TRUE}, bandwidths are recalculated at the beginning of the second step based on \code{bwc_impute0} and \code{bwc_impute1}. If \code{recalc_bandwidth} is \code{FALSE}, the first step bandwidths are used. The default value is \code{FALSE}.}
+\item{recalc_bandwidth}{Specifies whether the bandwidth should be recalculated after the first stage (the estimations of dimension reduction step). If \code{explicit_bandwidth} is \code{TRUE}, \code{recalc_bandwidth} is not used, but if \code{explicit_bandwidth} is \code{FALSE}, then if \code{recalc_bandwidth} is \code{TRUE}, bandwidths are recalculated at the beginning of the second step based on \code{bwc_impute0} and \code{bwc_impute1}. If \code{recalc_bandwidth} is \code{FALSE}, the first step bandwidths are used. The default value is \code{FALSE}.}
 
-\item{bwc_dim_red1}{Scaling of calculated bandwidth, or if \code{explicit_bandwidth = TRUE} used as the bandwidth. It is used in the dimension reduction step for \eqn{\hat{m}_1(\beta_1^T x)}. The default value is 1.}
+\item{bwc_dim_red1}{Scaling of calculated bandwidth, or if \code{explicit_bandwidth = TRUE} used as the bandwidth. It is used in the dimension reduction step for \eqn{\hat{m}_1(\beta_1^T x)}. The default value is \code{1}.}
 
-\item{bwc_impute1}{Scaling of calculated bandwidth, or if \code{explicit_bandwidth = TRUE} used as the bandwidth. It is used in the imputation step for \eqn{\hat{m}_1(\beta_1^T x)}. The default  value is 1.25.}
+\item{bwc_impute1}{Scaling of calculated bandwidth, or if \code{explicit_bandwidth = TRUE} used as the bandwidth. It is used in the imputation step for \eqn{\hat{m}_1(\beta_1^T x)}. The default  value is \code{1.25}.}
 
-\item{bwc_dim_red0}{Scaling of calculated bandwidth, or if \code{explicit_bandwidth = TRUE} used as the bandwidth. It is used in the dimension reduction step for \eqn{\hat{m}_0(\beta_0^T x)}. The default value is 1.}
+\item{bwc_dim_red0}{Scaling of calculated bandwidth, or if \code{explicit_bandwidth = TRUE} used as the bandwidth. It is used in the dimension reduction step for \eqn{\hat{m}_0(\beta_0^T x)}. The default value is \code{1}.}
 
-\item{bwc_impute0}{Scaling of calculated bandwidth, or if \code{explicit_bandwidth = TRUE} used as the bandwidth. It is used in the imputation step for \eqn{\hat{m}_0(\beta_0^T x)}. The default value is 1.25.}
+\item{bwc_impute0}{Scaling of calculated bandwidth, or if \code{explicit_bandwidth = TRUE} used as the bandwidth. It is used in the imputation step for \eqn{\hat{m}_0(\beta_0^T x)}. The default value is \code{1.25}.}
 
-\item{gauss_cutoff}{The cutoff value for Gaussian kernel. The default value is 1e-3.}
+\item{gauss_cutoff}{The cutoff value for Gaussian kernel. The default value is \code{1e-3}.}
 
-\item{penalty}{Penalty for the optimizer if local linear regression fails. Added to the function value in solver as penalty^(n - n_before_pen), where n is the number of times local linear regression fails. The default value is 10.}
+\item{penalty}{Penalty for the optimizer if local linear regression fails. Added to the function value in solver as \code{penalty}^(n - \code{n_before_pen}), where n is the number of times local linear regression fails. The default value is \code{10}.}
 
-\item{n_before_pen}{The number of acceptable local linear regression failure times during dimension reduction. The default value is 5.}
+\item{n_before_pen}{The number of acceptable local linear regression failures during the estimation of \eqn{\beta_0} and \eqn{\beta_1} phase. The default value is \code{5}.}
 
-\item{to_extrapolate}{Specifies whether to extrapolate or not. Since in \eqn{\hat{m}_0(\beta_0^T x)} and \eqn{\hat{m}_1(\beta_1^T x)} estimates in terms of \eqn{\beta_0} and \eqn{\beta_1}, local linear regression at the boundaries of \eqn{\beta_0} and \eqn{\beta_1} can be very volatile, it is recommended to use extrapolation on those points instead of local linear regression. The default value is \code{TRUE}.}
+\item{to_extrapolate}{Specifies whether to extrapolate or not. Since in \eqn{\hat{m}_0(\beta_0^T x)} and \eqn{\hat{m}_1(\beta_1^T x)} estimates in terms of \eqn{\beta_0} and \eqn{\beta_1}, local linear regression at the boundaries of \eqn{\beta_0^Tx} and \eqn{\beta_1^Tx} can be very volatile, it is recommended to use extrapolation on those points instead of local linear regression. The default value is \code{TRUE}.}
 
 \item{to_truncate}{Specifies whether to truncate \eqn{\hat{m}_0(\beta_0^T x)} and \eqn{\hat{m}_1(\beta_1^T x)} or not. After estimating \eqn{\hat{m}_0(\beta_0^T x)} and \eqn{\hat{m}_1(\beta_1^T x)}, if they are outside the range of observed outputs, they are replaced with the minimum and maximum observed outputs. The default value is \code{TRUE}.}
 
-\item{extrapolation_basis}{The number of data points to base extrapolation on. Extrapolation at border points can be done based on a different number of neighborhood points. \code{extrapolation_basis} is how many are used. The default value is 5.}
+\item{extrapolation_basis}{The number of data points to base extrapolation on. Extrapolation at border points can be done based on a different number of neighborhood points. \code{extrapolation_basis} is how many neighborhood points are used. The default value is \code{5}.}
 
-\item{n_threads}{Sets the number of threads for parallel running. Set to 0 serial. If n_threads exceeds the maximum number of threads, sets n_threads to max_threads - 1. To use max_threads, set to n_threads to max_threads of system. The default value is 1.}
+\item{n_threads}{Sets the number of threads for parallel computing. Set to 1 serial. If \code{n_threads} exceeds the maximum number of threads, sets \code{n_threads} to max_threads - 1. To use max_threads, set to \code{n_threads} to max_threads of system. The default value is \code{1}.}
 
 \item{verbose}{Specifies if the program should print output while running. The default value is \code{TRUE}.}
 
-\item{...}{Additional parameters passed to optim.}
+\item{...}{Additional parameters passed to \code{optim} or \code{cobyla}.}
 }
 \value{
 A list containing the average treatment effect of the
