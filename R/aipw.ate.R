@@ -3,11 +3,11 @@
 #' @description Augmented IPW (AIPW) as in Ghosh, Ma, & De Luna (2020).
 #'
 #' @param y       Observed response
-#' @param treated Binary vetor indicating treatment
-#' @param imp     imp output object from \code{imp.ate()}
-#' @param ipw     ipw output object from \code{ipw.ate()}
+#' @param treated A binary vetor indicating treatment
+#' @param imp     imp output object from \code{imp.ate}
+#' @param ipw     ipw output object from \code{ipw.ate}
 #'
-#' @return Average treatment effect (ATE) for the augmented IPW (AIPW)
+#' @return The AIPW estimation (AIPW) of the average treatment effect (ATE).
 #'
 #' @export
 #'

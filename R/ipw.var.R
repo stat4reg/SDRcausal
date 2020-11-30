@@ -4,15 +4,14 @@
 #'
 #' @param x                  Covariate matrix
 #' @param y                  Response vector
-#' @param treated            Binary vetor indicating treatment
-#' @param imp                imp output object from \code{imp.ate()}
-#' @param ipw                ipw output object from \code{ipw.ate()}
 #' @param treated            A binary vetor indicating treatment
-#' @param bandwidth_scale    Scaling of the calculated bandwidth, or in case of \code{explicit_bandwidth = TRUE}, the actual bandwidth for the estimations of \eqn{E(.|\alpha^T X)}. The default value is \code{ipw$bw_dr}.
-#' @param kernel             Specifies which kernel function to be used. The default one is "EPAN".
-#' @param explicit_bandwidth Specifies if bandwidth_scale will be used as the bandwidth or if it will be calculated as bw = bandwidth_scale * sd(\eqn{\alpha^T x}) * \eqn{n^{(1/5)}.}
-#' @param gauss_cutoff       Cutoff value for Gaussian kernel. The default value is 1e-3.
-#' @param num_deriv_h        Step size of numerical derivative. The default value is 1e-6.
+#' @param imp                imp output object from \code{imp.ate}
+#' @param ipw                ipw output object from \code{ipw.ate}
+#' @param bandwidth_scale    Scaling of the calculated bandwidth, or in case of \code{explicit_bandwidth = TRUE}, the actual bandwidth for the estimation of \eqn{E(\cdot|\alpha^T X)}. The default value is \code{ipw$bw_dr}. If this default value is used, one should use the default value \code{TRUE} for \code{explicit_bandwidth}.
+#' @param kernel             Specifies which kernel function to be used. The default is \code{"EPAN"}.
+#' @param explicit_bandwidth Specifies if bandwidth_scale will be used as the bandwidth or if it will be calculated as \code{bandwidth_scale} * sd(\eqn{\alpha^T x}) * \eqn{n^{(1/5)}}. The default value is \code{TRUE}.
+#' @param gauss_cutoff       The cutoff value for Gaussian kernel. The default value is \code{1e-3}.
+#' @param num_deriv_h        Step size of numerical derivative. The default value is \code{1e-6}.
 #' @param verbose            Specifies if the program should print output while running. The default value if \code{FALSE}.
 #'
 #' @return The variance of IPW

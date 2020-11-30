@@ -4,12 +4,11 @@
 #'              IPW, AIPW2 as in Ghosh, Ma, & De Luna (2020).
 #'
 #' @param y       Observed response
-#' @param treated Binary vetor indicating treatment
-#' @param imp     imp output object from \code{imp.ate()}
-#' @param ipw     ipw output object from \code{ipw.ate()}
+#' @param treated A binary vetor indicating treatment
+#' @param imp     imp output object from \code{imp.ate}
+#' @param ipw     ipw output object from \code{ipw.ate}
 #'
-#' @return Average treatment effect (ATE) for the improved augmented IPW
-#'         (AIPW2)
+#' @return The improved augmented IPW estimation (AIPW2) of the average treatment effect (ATE).
 #'
 #' @export
 #'
