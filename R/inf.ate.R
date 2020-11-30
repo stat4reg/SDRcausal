@@ -10,7 +10,7 @@
 #' @param beta_guess1         Initial guess for \eqn{\beta_1}
 #' @param beta_guess0         Initial guess for \eqn{\beta_0}
 #' @param imp.solver          Specifies which solver is to be used. Current options are \code{optim} and \code{cobyla} (from \code{nloptr} package). The diffault value is \code{"optim"}.
-#' @param imp.kernel          Specifies which kernel function is to be used, current options are: \code{"EPAN"}, \code{"QUARTIC"`, and \code{"GAUSSIAN"}. The default value is \code{"EPAN"}.
+#' @param imp.kernel          Specifies which kernel function is to be used, current options are: \code{"EPAN"}, \code{"QUARTIC"}, and \code{"GAUSSIAN"}. The default value is \code{"EPAN"}.
 #' @param imp.explicit_bandwidth  Specifies if \code{bandwidth_scale} will be used as the bandwidth or if it will be calculated as \code{bandwidth_scale} * sd(\eqn{\beta^T x}) * \eqn{n^{(1/5)}}. The default value is \code{FALSE}.
 #' @param imp.recalc_bandwidth    Specifies whether the bandwidth should be recalculated after the first stage (the estimations of dimension reduction step). If \code{explicit_bandwidth} is \code{TRUE}, \code{recalc_bandwidth} is not used, but if \code{explicit_bandwidth} is \code{FALSE}, then if \code{recalc_bandwidth} is \code{TRUE}, bandwidths are recalculated at the beginning of the second step based on \code{bwc_impute0} and \code{bwc_impute1}. If \code{recalc_bandwidth} is \code{FALSE}, the first step bandwidths are used. The default value is \code{FALSE}. 
 #' @param bwc_dim_red1        Scaling of calculated bandwidth, or if \code{explicit_bandwidth = TRUE} used as the bandwidth. It is used in the dimension reduction step for \eqn{\hat{m}_1(\beta_1^T x)}. The default value is \code{1}.
@@ -27,7 +27,7 @@
 #' @param verbose             Specifies if the program should print output while running. The default value is \code{TRUE}.
 #' 
 #' @param alpha_initial      Initial guess for \eqn{\alpha}
-#' @param ipw.kernel         Specifies which kernel function is to be used, current options are: \code{"EPAN"}, \code{"QUARTIC"`, and \code{"GAUSSIAN"}. The default value is \code{"EPAN"}.
+#' @param ipw.kernel         Specifies which kernel function is to be used, current options are: \code{"EPAN"}, \code{"QUARTIC"}, and \code{"GAUSSIAN"}. The default value is \code{"EPAN"}.
 #' @param ipw.explicit_bandwidth Specifies if \code{bandwidth_scale} will be used as the bandwidth or if it will be calculated as \code{bandwidth_scale} * sd(\eqn{\alpha^T x}) * \eqn{n^{(1/5)}}. The default value is \code{FALSE}.
 #' @param ipw.recalc_bandwidth   Specifies whether the bandwidth should be recalculated after the estimations of \eqn{\alpha}. If \code{explicit_bandwidth} is \code{TRUE}, \code{recalc_bandwidth} is not used, but if \code{explicit_bandwidth} is \code{FALSE}, then if \code{recalc_bandwidth} is \code{TRUE}, bandwidths are recalculated at the beginning of the second step based on \code{bwc_prop_score}. If \code{recalc_bandwidth} is \code{FALSE}, the first step bandwidths are used. The default value is \code{FALSE}. 
 #' @param bwc_dim_red        Scaling of calculated bandwidth, or if \code{explicit_bandwidth = TRUE} used as the bandwidth. It is used in the dimension reduction step for \eqn{\alpha^T x}. The default value is \code{1}.
