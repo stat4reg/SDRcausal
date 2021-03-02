@@ -75,6 +75,11 @@ aipw.var <- function(x,
   d <- as.integer(dim(imp$beta0_hat)[2])
 
 
+  # Make sure y is a vector
+  if(!is.vector(Y)){
+    y = as.vector(y)
+  }
+  
   # Boolean treatement vector
   tbl <- as.logical(treated)
 
