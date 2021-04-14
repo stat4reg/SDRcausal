@@ -17,3 +17,4 @@ Mac user may need to run the following command in a terminal window before insta
 ```
 xcode-select --install
 ```
+OpenMP is not available on Mac OS and only one thread can be used. 
