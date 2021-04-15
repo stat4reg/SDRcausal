@@ -76,7 +76,7 @@ aipw.var <- function(x,
 
 
   # Make sure y is a vector
-  if(!is.vector(Y)){
+  if(!is.vector(y)){
     y = as.vector(y)
   }
   
