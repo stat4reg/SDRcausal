@@ -85,13 +85,13 @@ plot.imp <- function(x , ... , covariates,
 
   # Plot of imputed treated outcomes vs CMS projection
   p2 <- ggplot(, aes(x = xb1)) +
-    geom_point(aes(y = imp$m1$m, shape = "imputed", color = tpl), alpha = tbl) +
-    geom_point(aes(y = imp$m1$m, shape = "estimated", color = tpl), alpha = !tbl) +
-    geom_point(aes(y = y, shape = "observed", color = tpl), alpha = tbl/3) +
+    geom_point(aes(y = imp$m1$m, shape = "Estimated", color = tpl), alpha = tbl) +
+    geom_point(aes(y = imp$m1$m, shape = "Estimated", color = tpl), alpha = !tbl) +
+    geom_point(aes(y = y, shape = "Observed", color = tpl), alpha = tbl/3) +
     geom_line(aes(y = imp$m1$m, color = tpl), alpha = 0.6) +
     scale_shape_manual("Source", values = c(2, 0, 1, 3)) +
     scale_alpha(..., range = c(0, 0.4)) +
-    guides(shape = guide_legend(title = "Obs/Imp/Est"),
+    guides(shape = guide_legend(title = "Obs/Est"),
            color = guide_legend(title = "Treatment"),
            linetype = guide_legend(title = " ")) +
     ggtitle(expression(paste("Imputated and observed outcomes VS subspace", ~beta[1]^T ,x)) ) +
@@ -100,13 +100,13 @@ plot.imp <- function(x , ... , covariates,
 
   # Plot of imputed untreated outcomes vs CMS projection
   p3 <- ggplot(, aes(x = xb0)) +
-    geom_point(aes(y = imp$m0$m, shape = "imputed", color = tpl), alpha = !tbl) +
-    geom_point(aes(y = imp$m0$m, shape = "estimated", color = tpl), alpha = tbl) +
-    geom_point(aes(y = y, shape = "observed", color = tpl), alpha = (!tbl)/3) +
+    geom_point(aes(y = imp$m0$m, shape = "Estimated", color = tpl), alpha = !tbl) +
+    geom_point(aes(y = imp$m0$m, shape = "Estimated", color = tpl), alpha = tbl) +
+    geom_point(aes(y = y, shape = "Observed", color = tpl), alpha = (!tbl)/3) +
     geom_line(aes(y = imp$m0$m, color = tpl), alpha = 0.6) +
     scale_shape_manual("Source", values = c(2, 0, 1, 3)) +
     scale_alpha(..., range = c(0, 0.4)) +
-    guides(shape = guide_legend(title = "Obs/Imp/Est"),
+    guides(shape = guide_legend(title = "Obs/Est"),
            color = guide_legend(title = "Treatment"),
            linetype = guide_legend(title = " ")) +
     ggtitle(expression(paste("Imputated and observed outcomes VS subspace", ~beta[0]^T ,x))) +
